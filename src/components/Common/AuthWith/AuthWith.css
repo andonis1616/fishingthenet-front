@@ -1,0 +1,58 @@
+.auth-with {
+    width: 100%;
+}
+.auth-with-group,
+.auth-with-group-text {
+    background: #F5F5F5;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    padding: 8px 45px;
+    margin-bottom: 15px;
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+}
+.auth-with-group:hover {
+    cursor: pointer;
+}
+.auth-with-group .text {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 24px;
+    /* identical to box height, or 185% */
+
+    letter-spacing: -0.015em;
+
+    color: rgba(0, 0, 0, 0.5);
+    padding-left: 21px;
+}
+
+.auth-with-group-text {
+    flex-direction: column;
+    border: none;
+}
+.auth-with-group-text .auth-with-text {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 24px;
+}
+
+.auth-with-group-text .auth-with-link {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 24px;
+    /* identical to box height, or 218% */
+    
+    letter-spacing: -0.015em;
+    text-decoration-line: underline;
+    
+    color: #18A0FB;
+    cursor: pointer;
+}

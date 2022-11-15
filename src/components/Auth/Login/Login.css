@@ -1,0 +1,146 @@
+.container-login {
+    padding: 0 20px;
+    width: calc(100% - 40px);
+    text-align: center;
+}
+
+.profile {
+    margin: 40px 0;
+}
+.profile img{
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.login-wrapper {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 45px 37px;
+    /* width: calc(338px); */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+.login-wrapper .login{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: -0.015em;
+    color: #000000;
+    margin-bottom: 25px;
+}
+.login-wrapper .email,
+.login-wrapper .password {
+    width: 100%;
+    margin-bottom: 24px;
+}
+.login-wrapper .email input,
+.login-wrapper .password input{
+    /* width: calc(100% - 24px); */
+    width: calc(100%);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    padding: 12px;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+.login-wrapper .login-group{
+    margin-bottom: 33px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+/* .login-wrapper .login-group .remember-me{
+    
+}
+.login-wrapper .login-group .forgot-password{
+    
+} */
+.login-wrapper .login-group .forgot-password {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 24px;
+    /* identical to box height, or 218% */
+
+    text-decoration-line: underline;
+
+    color: rgba(0, 0, 0, 0.8);
+
+    cursor: pointer;
+}
+
+.login-wrapper .login-btn{
+    background: #18A0FB;
+    border-radius: 6px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.015em;
+
+    color: #FFFFFF;
+    padding: 11px 42px;
+}
+.login-wrapper .login-btn:hover {
+    cursor: pointer;
+}
+
+/*  */
+
+.or {
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 11px;
+line-height: 24px;
+/* identical to box height, or 218% */
+
+letter-spacing: -0.015em;
+
+color: rgba(0, 0, 0, 0.8);
+margin: 8px 0;
+}
+
+.auth-with {
+    width: 100%;
+}
+.auth-with-group {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    padding: 8px 45px;
+    margin-bottom: 15px;
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+}
+.auth-with-group:hover {
+    cursor: pointer;
+}
+.auth-with-group .text {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 24px;
+    /* identical to box height, or 185% */
+
+    letter-spacing: -0.015em;
+
+    color: rgba(0, 0, 0, 0.5);
+    padding-left: 21px;
+}
