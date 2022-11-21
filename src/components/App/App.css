@@ -1,7 +1,7 @@
 .app {
     height: 100%;
     width: 400px;
-    background: white;
+    background: var(--clr-background);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,6 +9,15 @@
     box-sizing: border-box;
     overflow-y: auto;
 }
-.app {
-    background: #F5F5F5;
+/* 
+:root:has(.checkbox-dark-mode:checked) {
+    --clr-background: red;
+} */
+
+h1,h2,h3,h4,h5,h6 {
+    color: var(--clr-black)
+}
+
+path {
+    fill: var(--clr-black)
 }

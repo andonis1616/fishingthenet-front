@@ -13,54 +13,81 @@ const Header = ({ changePage, changePageThunk, ...props }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleShowMenu = () => {
-    console.log('menu');
     setShowMenu(!showMenu);
   };
 
   const handleChangePage = pageNumber => {
-    console.log('pageNumber', pageNumber);
     changePageThunk(pageNumber);
   };
+
+  /**
+   * Render
+   */
+
+  const renderArrowLeftIcon = () => (
+    <div className="nav-left-back" onClick={() => handleChangePage(4)}>
+      <ArrowLeft></ArrowLeft>
+    </div>
+  );
+
+  const renderBurger = () => (
+    <div className="nav-left-burger" onClick={() => handleShowMenu()}>
+      <Burger></Burger>
+    </div>
+  );
+
+  const renderShowMenu = () => (
+    <div className="menu">
+      <div className="menu-row" onClick={() => handleChangePage(5)}>
+        <div className="svg">
+          <Man></Man>
+        </div>
+        Accessibility
+      </div>
+      <div className="menu-row" onClick={() => handleChangePage(6)}>
+        <div className="svg">
+          <Money></Money>
+        </div>
+        Pricing plans
+      </div>
+      <div className="menu-row" onClick={() => handleChangePage(7)}>
+        <div className="svg">
+          <Settings></Settings>
+        </div>
+        Settings
+      </div>
+    </div>
+  );
+
+  const renderDate = () => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+
+    return <div className="nav-mid">{today}</div>;
+  };
+
+  const renderProfileImage = () => (
+    <div className="nav-right" onClick={() => handleChangePage(8)}>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg"></img>
+    </div>
+  );
 
   return (
     <div className="container">
       <div className="nav">
         <div className="nav-left">
-          {changePage > 4 && (
-            <div className="nav-left-back" onClick={() => handleChangePage(4)}>
-              <ArrowLeft></ArrowLeft>
-            </div>
-          )}
-          <div onClick={() => handleShowMenu()}>
-            <Burger></Burger>
-          </div>
-          {showMenu && (
-            <div className="menu">
-              <div className="menu-row" onClick={() => handleChangePage(5)}>
-                <div className="svg">
-                  <Man></Man>
-                </div>
-                Accessibility
-              </div>
-              <div className="menu-row" onClick={() => handleChangePage(6)}>
-                <div className="svg">
-                  <Money></Money>
-                </div>
-                Pricing plans
-              </div>
-              <div className="menu-row" onClick={() => handleChangePage(7)}>
-                <div className="svg">
-                  <Settings></Settings>
-                </div>
-                Settings
-              </div>
-            </div>
-          )}
+          {changePage > 4 && renderArrowLeftIcon()}
+
+          {changePage !== 8 && renderBurger()}
+
+          {showMenu && renderShowMenu()}
         </div>
-        <div className="nav-mid">12/11/2022</div>
-        <div className="nav-right">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg"></img>
-        </div>
+        {changePage !== 8 && renderDate()}
+        {changePage !== 8 && renderProfileImage()}
       </div>
     </div>
   );

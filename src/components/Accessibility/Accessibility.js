@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import useLocalStorage from 'use-local-storage';
+import { switchThemeThunk } from '../../state/thunks/theme.thunk';
 import Eye from '../../utils/Icons/Eye';
 import Keyboard from '../../utils/Icons/Keyboard';
 import Moon from '../../utils/Icons/Moon';
@@ -7,7 +9,25 @@ import Header from '../Header/Header';
 
 import './Accessibility.css';
 
-const Accessibility = ({ ...props }) => {
+const Accessibility = ({ switchThemeState, switchThemeThunk, ...props }) => {
+  const [checked, setChecked] = React.useState(false);
+  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [theme, setTheme] = useLocalStorage(
+    'theme',
+    defaultDark ? 'dark' : 'light',
+  );
+
+  useEffect(() => {
+    switchThemeState === 'dark' && setChecked(true);
+  }, []);
+
+  const switchTheme = () => {
+    setChecked(!checked);
+    const newTheme = switchThemeState === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    switchThemeThunk(newTheme);
+  };
+
   return (
     <>
       <Header></Header>
@@ -20,7 +40,12 @@ const Accessibility = ({ ...props }) => {
             </div>
             Dark mode
             <div className="toggle">
-              <input type="checkbox" />
+              <input
+                className="checkbox-dark-mode"
+                type="checkbox"
+                checked={checked}
+                onChange={switchTheme}
+              />
             </div>
           </div>
 
@@ -47,8 +72,12 @@ const Accessibility = ({ ...props }) => {
   );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  switchThemeState: state.switchThemeState.switchTheme,
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  switchThemeThunk: switchThemeThunk,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Accessibility);

@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-import { skillsReducer } from './reducers/page.reducers';
+import { pageReducer } from './reducers/page.reducers';
+import { switchTheme } from './reducers/theme.reducers';
 
 export const rootReducers = combineReducers({
-  skillsState: skillsReducer,
+  skillsState: pageReducer,
+  switchThemeState: switchTheme,
 });

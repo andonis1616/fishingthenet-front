@@ -23,10 +23,14 @@
     margin-right: 20px;
 }
 
+.nav .nav-left .nav-left-burger {
 
+}
+
+/* menu */
 .nav .nav-left .menu {
     padding: 40px 16px 23px;
-    background: #FFFFFF;
+    background: var(--clr-white);
     border-radius: 20px;
     width: 190px;
     position: absolute;
@@ -38,6 +42,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 18px;
+    color: var(--clr-black);
 }
 .nav .nav-left .menu .menu-row:hover {
     font-weight: bold;
@@ -49,12 +54,14 @@
     justify-content: center;
 }
 
+/* Date */
 .nav .nav-mid {
     
 }
 
+/* profile */
 .nav .nav-right {
-    
+    cursor: pointer;
 }
 
 .nav .nav-right img {

@@ -3,7 +3,7 @@
 }
 .auth-with-group,
 .auth-with-group-text {
-    background: #F5F5F5;
+    background: var(--clr-blue-grey);
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 6px;
     padding: 8px 45px;
@@ -53,6 +53,6 @@
     letter-spacing: -0.015em;
     text-decoration-line: underline;
     
-    color: #18A0FB;
+    color: var(--clr-blue-light);
     cursor: pointer;
 }

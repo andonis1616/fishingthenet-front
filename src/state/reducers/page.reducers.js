@@ -5,7 +5,7 @@ const initialState = {
   changePage: 2,
 };
 
-export const skillsReducer = (state = { ...initialState }, action) => {
+export const pageReducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     /**
      * Skills Category
