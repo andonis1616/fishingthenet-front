@@ -87,7 +87,7 @@ const Profile = ({ changePage, changePageThunk, ...props }) => {
 };
 
 const mapStateToProps = state => ({
-  changePage: state?.skillsState?.changePage,
+  changePage: state?.pageState?.changePage,
 });
 
 const mapDispatchToProps = {

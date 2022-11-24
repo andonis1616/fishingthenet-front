@@ -39,7 +39,6 @@
 .register-wrapper .email,
 .register-wrapper .password {
     width: 100%;
-    margin-bottom: 24px;
 }
 .register-wrapper .firstname input,
 .register-wrapper .lastname input,
@@ -94,6 +93,7 @@
     align-items: center;
     text-align: center;
     letter-spacing: -0.015em;
+    border: none;
 
     color: var(--clr-white);
     padding: 11px 42px;

@@ -1,35 +1,111 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { postRegisterThunk } from '../../../state/thunks/auth.thunk';
 import { changePageThunk } from '../../../state/thunks/page.thunk';
+import Fish from '../../../utils/Icons/aaa.png';
 import AuthWith from '../../Common/AuthWith/AuthWith';
 import './Register.css';
 
+const initialData = {
+  name: {
+    value: '',
+    error: '',
+    isError: false,
+  },
+  username: {
+    value: '',
+    error: '',
+    isError: false,
+  },
+  email: {
+    value: '',
+    error: '',
+    isError: false,
+  },
+  password: {
+    value: '',
+    error: '',
+    isError: false,
+  },
+};
+
 const Register = ({
-  skillsCategory,
   changePage,
   changePageThunk,
+  postRegisterThunk,
   ...props
 }) => {
-  React.useEffect(() => {
-    // fetchSkillsCategoryThunk();
-  }, []);
+  const [data, setData] = useState(initialData);
 
-  const renderProfile = () => {
-    return (
-      <div className="profile">
-        <img
-          src="https://image.shutterstock.com/image-vector/male-profile-picture-avatar-600w-147777698.jpg"
-          width={45}
-          height={45}
-          alt="profile"
-        ></img>
-      </div>
-    );
-  };
+  const renderProfile = () => (
+    <div className="profile">
+      <img src={Fish} width={45} height={45} alt="profile"></img>
+      {/* <Fish></Fish> */}
+    </div>
+  );
 
   const handleChangePage = pageNumber => {
-    console.log('pageNumber', pageNumber);
     changePageThunk(pageNumber);
+  };
+
+  const handleChange = (e, p) => {
+    const inputName = e.target.name;
+    const inputValue = e.target.value;
+    setData({
+      ...data,
+      [inputName]: {
+        ...data[inputName],
+        value: inputValue,
+        error: '',
+        isError: false,
+      },
+    });
+  };
+
+  const checkIfExistErrors = () => {
+    let isError = false;
+    let dataCopy = { ...data };
+
+    if (!dataCopy.name.value) {
+      dataCopy.name.error = 'This Field is Required';
+      dataCopy.name.isError = true;
+      isError = true;
+    }
+    if (!dataCopy.username.value) {
+      dataCopy.username.error = 'This Field is Required';
+      dataCopy.username.isError = true;
+      isError = true;
+    }
+    if (!dataCopy.email.value) {
+      dataCopy.email.error = 'This Field is Required';
+      dataCopy.email.isError = true;
+      isError = true;
+    }
+    if (!dataCopy.password.value) {
+      dataCopy.password.error = 'This Field is Required';
+      dataCopy.password.isError = true;
+      isError = true;
+    }
+    if (isError) {
+      setData(dataCopy);
+    }
+    return isError;
+  };
+
+  const sendDataToBE = async () => {
+    if (!checkIfExistErrors()) {
+      const obj = {
+        name: data.name.value,
+        username: data.username.value,
+        email: data.email.value,
+        password: data.password.value,
+      };
+      const response = await postRegisterThunk(obj);
+      console.log('response SEND', response);
+      if (response?.status !== 500) {
+        handleChangePage(1);
+      }
+    }
   };
 
   const renderRegister = () => {
@@ -38,22 +114,50 @@ const Register = ({
         <div className="register">Sign up</div>
 
         <div className="firstname">
-          <input type="text" placeholder="First name"></input>
+          <input
+            type="text"
+            placeholder="First name"
+            value={data.name.value}
+            name={'name'}
+            onChange={handleChange}
+          ></input>
+          <div>{data.name.error}</div>
         </div>
 
         <div className="lastname">
-          <input type="text" placeholder="Last name"></input>
+          <input
+            type="text"
+            placeholder="Last name"
+            value={data.username.value}
+            name={'username'}
+            onChange={handleChange}
+          ></input>
+          <div>{data.username.error}</div>
         </div>
 
         <div className="email">
-          <input type="email" placeholder="Email address"></input>
+          <input
+            type="email"
+            placeholder="Email address"
+            value={data.email.value}
+            name={'email'}
+            onChange={handleChange}
+          ></input>
+          <div>{data.email.error}</div>
         </div>
 
         <div className="password">
-          <input type="pass" placeholder="Create password"></input>
+          <input
+            type="pass"
+            placeholder="Create password"
+            value={data.password.value}
+            name={'password'}
+            onChange={handleChange}
+          ></input>
+          <div>{data.password.error}</div>
         </div>
 
-        <button onClick={() => handleChangePage(1)} className="register-btn">
+        <button onClick={sendDataToBE} className="register-btn">
           Sign up
         </button>
       </div>
@@ -77,13 +181,12 @@ const Register = ({
 };
 
 const mapStateToProps = state => ({
-  // skillsCategory: state?.skillsState?.skillsCategory,
-  changePage: state?.skillsState?.changePage,
+  changePage: state?.pageState?.changePage,
 });
 
 const mapDispatchToProps = {
-  // fetchSkillsCategoryThunk: fetchSkillsCategoryThunk,
   changePageThunk: changePageThunk,
+  postRegisterThunk: postRegisterThunk,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

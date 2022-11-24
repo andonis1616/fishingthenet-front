@@ -90,6 +90,7 @@
     align-items: center;
     text-align: center;
     letter-spacing: -0.015em;
+    border: none;
 
     color: var(--clr-white);
     padding: 11px 42px;

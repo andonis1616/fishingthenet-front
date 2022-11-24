@@ -14,7 +14,6 @@ const AuthWith = ({
   const { question, questionLink } = props;
 
   const handleChangePage = pageNumber => {
-    console.log('pageNumber', pageNumber);
     changePageThunk(pageNumber);
   };
 
@@ -48,7 +47,7 @@ const AuthWith = ({
 };
 
 const mapStateToProps = state => ({
-  changePage: state?.skillsState?.changePage,
+  changePage: state?.pageState?.changePage,
 });
 
 const mapDispatchToProps = {

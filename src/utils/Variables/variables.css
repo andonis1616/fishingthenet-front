@@ -3,17 +3,17 @@
     --clr-white: #FFFFFF;
     --clr-gray: #CCCCCC;
     --clr-black: #000000;
-    --clr-blue-light: #18A0FB;
+    --clr-blue-light: #569CBE;
     --clr-blue-dark: #105C8E;
 }
 
 
-:root {
-    /* --background: white;
+/* :root {
+    --background: white;
     --text-primary: black;
     --text-secondary: royalblue;
-    --accent: purple; */
-  }
+    --accent: purple;
+  } */
   
 [data-theme='dark'] {
     --clr-background: black;

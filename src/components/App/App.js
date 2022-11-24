@@ -15,8 +15,6 @@ import { switchThemeThunk } from '../../state/thunks/theme.thunk';
 // const optiunePagina = 2;
 
 const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
-  console.log('changePage!!!!!!!!!!!!!!!111111', changePage);
-  console.log('switchThemeState!!!!!!!!!!!!!!!111111', switchThemeState);
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [theme, setTheme] = useLocalStorage(
     'theme',
@@ -148,7 +146,7 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
 };
 
 const mapStateToProps = state => ({
-  changePage: state?.skillsState?.changePage,
+  changePage: state?.pageState?.changePage,
   switchThemeState: state.switchThemeState.switchTheme,
 });
 
