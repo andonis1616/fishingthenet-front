@@ -16,7 +16,7 @@ const Line = () => {
         x2="15.99"
         y2="1"
         stroke="black"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   );

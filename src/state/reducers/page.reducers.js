@@ -2,7 +2,7 @@ import { CHANGE_PAGE, HR_FETCH_SKILLS } from '../actions/page.action';
 
 const initialState = {
   // skillsCategory: {},
-  changePage: 2,
+  changePage: localStorage.getItem('token') ? 4 : 2,
 };
 
 export const pageReducer = (state = { ...initialState }, action) => {

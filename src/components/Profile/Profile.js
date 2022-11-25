@@ -16,7 +16,8 @@ const Profile = ({ changePage, changePageThunk, ...props }) => {
   };
 
   const handleLogOut = () => {
-    console.log('handleLogOut');
+    localStorage.removeItem('token');
+    handleChangePage(1);
   };
 
   const handleChangePage = pageNumber => {

@@ -12,9 +12,9 @@ const Check = () => {
       <path
         d="M1.58325 6.83333L5.24992 10.5L14.4166 1.33333"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

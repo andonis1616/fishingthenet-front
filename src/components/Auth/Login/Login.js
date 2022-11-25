@@ -81,8 +81,8 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
       console.log('obj', obj);
       const response = await postLoginThunk(obj);
       console.log('response SEND', response);
-      if (response?.status !== 500) {
-        // handleChangePage(4);
+      if (response !== undefined) {
+        handleChangePage(4);
       }
     }
   };

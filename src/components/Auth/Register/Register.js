@@ -102,7 +102,7 @@ const Register = ({
       };
       const response = await postRegisterThunk(obj);
       console.log('response SEND', response);
-      if (response?.status !== 500) {
+      if (response && response?.status !== 500) {
         handleChangePage(1);
       }
     }

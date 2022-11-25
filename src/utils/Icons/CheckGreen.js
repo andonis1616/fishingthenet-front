@@ -12,9 +12,9 @@ const CheckGreen = () => {
       <path
         d="M1.58325 6.83331L5.24992 10.5L14.4166 1.33331"
         stroke="#50D796"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
