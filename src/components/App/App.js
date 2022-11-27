@@ -1,24 +1,25 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import Accessibility from '../Accessibility/Accessibility';
-import ForgotPassword from '../Auth/ForgotPassword/ForgotPassword';
-import Login from '../Auth/Login/Login';
-import Register from '../Auth/Register/Register';
-import Home from '../Home/Home';
-import PricingPlans from '../PricingPlans/PricingPlans';
-import Profile from '../Profile/Profile';
-import Settings from '../Settings/Settings';
-import './App.css';
-import '../../utils/Variables/variables.css';
-import useLocalStorage from 'use-local-storage';
-import { switchThemeThunk } from '../../state/thunks/theme.thunk';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import Accessibility from "../Accessibility/Accessibility";
+import ForgotPassword from "../Auth/ForgotPassword/ForgotPassword";
+import Login from "../Auth/Login/Login";
+import Register from "../Auth/Register/Register";
+import Home from "../Home/Home";
+import PricingPlans from "../PricingPlans/PricingPlans";
+import Profile from "../Profile/Profile";
+import Settings from "../Settings/Settings";
+import "./App.css";
+import "../../utils/Variables/variables.css";
+import useLocalStorage from "use-local-storage";
+import { switchThemeThunk } from "../../state/thunks/theme.thunk";
+import Bottom from "../Bottom/Bottom";
 // const optiunePagina = 2;
 
 const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
-  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [theme, setTheme] = useLocalStorage(
-    'theme',
-    defaultDark ? 'dark' : 'light',
+    "theme",
+    defaultDark ? "dark" : "light"
   );
 
   // const switchTheme = () => {
@@ -44,7 +45,7 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
   // logInnerText(document.querySelector('[data-app-section="MailReadCompose"]'))
 
   const FUNCTIA_MARE = () => {
-    console.log('CLICKKKKKKKKKKKKKKKK');
+    console.log("CLICKKKKKKKKKKKKKKKK");
     // Compensate for IE<9's non-standard event model
     //
     // if (event === undefined) event = window.event;
@@ -55,15 +56,15 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
     // console.log('target@@@@@@@@@@@@@@@@@@@@@@@', target);
     const TEST = () => {
       console.log(
-        'CLICK AICIIIIIII',
-        document.querySelector('[data-app-section="MailReadCompose"]'),
+        "CLICK AICIIIIIII",
+        document.querySelector('[data-app-section="MailReadCompose"]')
       );
 
       // Get data from browser
 
       const dataArray = [];
-      var title = '';
-      var email = '';
+      var title = "";
+      var email = "";
       var count = 0;
 
       function logInnerText(elem, index = undefined) {
@@ -86,15 +87,15 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
       }
 
       logInnerText(
-        document.querySelector('[data-app-section="MailReadCompose"]'),
+        document.querySelector('[data-app-section="MailReadCompose"]')
       );
 
       const SendDataToBE = {
         title,
         email,
-        content: dataArray.toString(' '),
+        content: dataArray.toString(" "),
       };
-      console.log('SendDataToBE!!!!!!!!!!!!', SendDataToBE);
+      console.log("SendDataToBE!!!!!!!!!!!!", SendDataToBE);
       // end get data
     };
     window.setTimeout(TEST, 3000);
@@ -102,12 +103,12 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
 
   var elementDOM = document.querySelector('[role="complementary"]');
   if (elementDOM)
-    elementDOM.addEventListener('click', e => {
-      console.log('ROLE element clicked!!!!!!!!!!!!!!!!!!!!!!!!!!', e);
+    elementDOM.addEventListener("click", (e) => {
+      console.log("ROLE element clicked!!!!!!!!!!!!!!!!!!!!!!!!!!", e);
       FUNCTIA_MARE();
     });
 
-  const renderComponent = option => {
+  const renderComponent = (option) => {
     switch (option) {
       case 1:
         return <Login />;
@@ -141,11 +142,13 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
   return (
     <div className="app" data-theme={switchThemeState}>
       {renderComponent(changePage)}
+
+      <Bottom></Bottom>
     </div>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   changePage: state?.pageState?.changePage,
   switchThemeState: state.switchThemeState.switchTheme,
 });

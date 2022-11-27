@@ -6,47 +6,75 @@
 }
 
 /* progress-bar */
+.circular-progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--clr-white);
+    border-radius: 20px;
+    padding: 13px 30px;
+    margin-bottom: 24px;
+}
 
 .circular-progress {
     position: relative;
-    height: 130px;
-    width: 130px;
+    height: 100px;
+    width: 100px;
     border-radius: 50%;
-    background: conic-gradient(var(--clr-blue-light) 3.6deg, var(--clr-background) 0deg);
+    background: conic-gradient(var(--clr-blue-light) 3.6deg, var(--clr-white) 0deg);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 40px auto;
 }
 .circular-progress::before {
     content: "";
     position: absolute;
-    height: 100px;
-    width: 100px;
+    height: 70px;
+    width: 70px;
     border-radius: 50%;
-    background-color: var(--clr-background);
+    background-color: var(--clr-white);
 }
 
 .progress-value {
     position: relative;
-    font-size: 35px;
+    font-size: 25px;
     font-weight: 600;
     color: var(--clr-blue-dark);
 }
 
-/* attacks */
-.attacks {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+
+.circular-progress-text p {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    
+    color: var(--clr-black);
 }
+.circular-progress-text p:first-child {
+    font-style: normal;
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    
+    color: var(--clr-black);
+}
+
+/* attacks */
+ 
 
 .attacks-frequent ,
 .attacks-numbers {
-    padding: 16px 33px 20px;
     background: var(--clr-white);
+    color: var(--clr-black);
     border-radius: 20px;
-    width: 48%;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
 }
 
 .attacks-frequent-text,
@@ -56,18 +84,31 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-    text-align: center;
-    color: var(--clr-black);
-    padding-bottom: 16px;
+    margin-bottom: 10px;
+
+
+    opacity: 0.7;
 }
 .attacks-frequent-number,
 .attacks-numbers-number {
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
-    text-align: center;
-    color: var(--clr-black);
+    
+    
+    opacity: 0.8;
 }
 
+.frequent {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.numbers {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

@@ -1,0 +1,21 @@
+.bottom {
+    margin: 25px auto 0 auto;
+    color: var(--clr-black);
+}
+
+.bottom a {
+    color: #47B5FF;
+    margin-left: 5px;
+}
+
+.bottom-social {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+}
+
+.bottom-social svg:first-child {
+    margin-right: 48px;
+}

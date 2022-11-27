@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { changePageThunk } from '../../../state/thunks/page.thunk';
+import Fish from '../../../utils/Icons/Fish';
 import AuthWith from '../../Common/AuthWith/AuthWith';
 import './ForgotPassword.css';
 
@@ -8,12 +9,7 @@ const ForgotPassword = ({ changePage, changePageThunk, ...props }) => {
   const renderProfile = () => {
     return (
       <div className="profile">
-        <img
-          src="https://image.shutterstock.com/image-vector/male-profile-picture-avatar-600w-147777698.jpg"
-          width={45}
-          height={45}
-          alt="profile"
-        ></img>
+       <Fish></Fish>
       </div>
     );
   };

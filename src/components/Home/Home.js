@@ -1,13 +1,17 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import Header from '../Header/Header';
-
-import './Home.css';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import Sword from "../../utils/Icons/Sword";
+import Header from "../Header/Header";
+import jwt_decode from "jwt-decode";
+import "./Home.css";
 
 const Home = ({ ...props }) => {
+  var token = localStorage.getItem("token");
+  var decoded = jwt_decode(token);
+
   useEffect(() => {
-    let circularProgress = document.querySelector('.circular-progress'),
-      progressValue = document.querySelector('.progress-value');
+    let circularProgress = document.querySelector(".circular-progress"),
+      progressValue = document.querySelector(".progress-value");
 
     let progressStartValue = 0,
       progressEndValue = 90,
@@ -17,8 +21,9 @@ const Home = ({ ...props }) => {
       progressStartValue++;
 
       progressValue.textContent = `${progressStartValue}%`;
-      circularProgress.style.background = `conic-gradient(#18A0FB ${progressStartValue *
-        3.6}deg,#F5F5F5 0deg)`;
+      circularProgress.style.background = `conic-gradient(var(--clr-blue-light) ${
+        progressStartValue * 3.6
+      }deg, var(--clr-white) 0deg)`;
 
       if (progressStartValue == progressEndValue) {
         clearInterval(progress);
@@ -26,37 +31,66 @@ const Home = ({ ...props }) => {
     }, speed);
   }, []);
 
+  const renderCircular = () => {
+    return (
+      <section className="circular-progress-container">
+        <div className="circular-progress">
+          <span className="progress-value">0%</span>
+        </div>
+        <div className="circular-progress-text">
+          <p>Protection percentage</p>
+          <p>at the moment</p>
+        </div>
+      </section>
+    );
+  };
+
+  const renderAttacksFrequent = () => {
+    return (
+      <div className="attacks-frequent">
+        <Sword></Sword>
+        <div className="frequent">
+          <div className="attacks-frequent-text">
+            Most frequent attack source
+          </div>
+          <div className="attacks-frequent-number">Russia</div>
+        </div>
+      </div>
+    );
+  };
+  const renderAttacksNumbers = () => {
+    return (
+      <div className="attacks-numbers">
+        <div className="numbers">
+          <div className="attacks-numbers-text">Number of attempts</div>
+          <div className="attacks-numbers-number">170.000</div>
+        </div>
+        <img src="wall.png" width={55} height={64} alt="img"></img>
+      </div>
+    );
+  };
+
   return (
     <>
       <Header></Header>
 
-      <div className="container-home">
-        <section className="circular-progress">
-          <span className="progress-value">0%</span>
-        </section>
+      <h1 className="home-title">Hi, {decoded.sub}</h1>
 
-        <section className="attacks">
-          <div className="attacks-frequent">
-            <div className="attacks-frequent-text">
-              Most frequent attack source
-            </div>
-            <div className="attacks-frequent-number">Russia</div>
-          </div>
-          <div className="attacks-numbers">
-            <div className="attacks-numbers-text">Number of attempts</div>
-            <div className="attacks-numbers-number">170.000</div>
-          </div>
-        </section>
+      <div className="container-home">
+        {renderAttacksFrequent()}
+        {renderAttacksNumbers()}
 
         <section className="chart">chart</section>
 
         <section className="map">map</section>
+
+        {renderCircular()}
       </div>
     </>
   );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {};
 

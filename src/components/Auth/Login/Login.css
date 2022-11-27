@@ -37,7 +37,12 @@
 .login-wrapper .email,
 .login-wrapper .password {
     width: 100%;
-    margin-bottom: 24px;
+    position: relative;
+}
+.error-msg {
+    position: absolute;
+    top: 47px;
+    color: brown;
 }
 .login-wrapper .email input,
 .login-wrapper .password input{

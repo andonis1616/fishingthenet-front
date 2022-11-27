@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { changePageThunk } from '../../state/thunks/page.thunk';
-import ArrowLeft from '../../utils/Icons/ArrowLeft';
-import Burger from '../../utils/Icons/Burger';
-import Man from '../../utils/Icons/Man';
-import Money from '../../utils/Icons/Money';
-import Settings from '../../utils/Icons/Settings';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { changePageThunk } from "../../state/thunks/page.thunk";
+import ArrowLeft from "../../utils/Icons/ArrowLeft";
+import Burger from "../../utils/Icons/Burger";
+import Man from "../../utils/Icons/Man";
+import Money from "../../utils/Icons/Money";
+import Settings from "../../utils/Icons/Settings";
 
-import './Header.css';
+import "./Header.css";
 
 const Header = ({ changePage, changePageThunk, ...props }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -16,7 +16,7 @@ const Header = ({ changePage, changePageThunk, ...props }) => {
     setShowMenu(!showMenu);
   };
 
-  const handleChangePage = pageNumber => {
+  const handleChangePage = (pageNumber) => {
     changePageThunk(pageNumber);
   };
 
@@ -26,13 +26,13 @@ const Header = ({ changePage, changePageThunk, ...props }) => {
 
   const renderArrowLeftIcon = () => (
     <div className="nav-left-back" onClick={() => handleChangePage(4)}>
-      <ArrowLeft></ArrowLeft>
+      <ArrowLeft fill="var(--clr-black)"></ArrowLeft>
     </div>
   );
 
   const renderBurger = () => (
     <div className="nav-left-burger" onClick={() => handleShowMenu()}>
-      <Burger></Burger>
+      <Burger fill="var(--clr-black)"></Burger>
     </div>
   );
 
@@ -40,19 +40,19 @@ const Header = ({ changePage, changePageThunk, ...props }) => {
     <div className="menu">
       <div className="menu-row" onClick={() => handleChangePage(5)}>
         <div className="svg">
-          <Man></Man>
+          <Man fill="var(--clr-black)"></Man>
         </div>
         Accessibility
       </div>
       <div className="menu-row" onClick={() => handleChangePage(6)}>
         <div className="svg">
-          <Money></Money>
+          <Money fill="var(--clr-black)"></Money>
         </div>
         Pricing plans
       </div>
       <div className="menu-row" onClick={() => handleChangePage(7)}>
         <div className="svg">
-          <Settings></Settings>
+          <Settings fill="var(--clr-black)"></Settings>
         </div>
         Settings
       </div>
@@ -61,11 +61,11 @@ const Header = ({ changePage, changePageThunk, ...props }) => {
 
   const renderDate = () => {
     var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     var yyyy = today.getFullYear();
 
-    today = mm + '/' + dd + '/' + yyyy;
+    today = mm + "/" + dd + "/" + yyyy;
 
     return <div className="nav-mid">{today}</div>;
   };
@@ -93,7 +93,7 @@ const Header = ({ changePage, changePageThunk, ...props }) => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   changePage: state?.pageState?.changePage,
 });
 

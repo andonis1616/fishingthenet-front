@@ -39,6 +39,12 @@
 .register-wrapper .email,
 .register-wrapper .password {
     width: 100%;
+    position: relative;
+}
+.error-msg {
+    position: absolute;
+    top: 47px;
+    color: brown;
 }
 .register-wrapper .firstname input,
 .register-wrapper .lastname input,
@@ -83,6 +89,7 @@
 .register-wrapper .register-btn{
     background: var(--clr-blue-light);
     border-radius: 6px;
+    margin-top: 20px;
 
     font-family: 'Montserrat';
     font-style: normal;

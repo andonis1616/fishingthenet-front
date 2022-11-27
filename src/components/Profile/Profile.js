@@ -1,26 +1,26 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { changePageThunk } from '../../state/thunks/page.thunk';
-import Edit from '../../utils/Icons/Edit';
-import LogOut from '../../utils/Icons/LogOut';
-import Man from '../../utils/Icons/Man';
-import Money from '../../utils/Icons/Money';
-import Settings from '../../utils/Icons/Settings';
-import Header from '../Header/Header';
+import React from "react";
+import { connect } from "react-redux";
+import { changePageThunk } from "../../state/thunks/page.thunk";
+import Edit from "../../utils/Icons/Edit";
+import LogOut from "../../utils/Icons/LogOut";
+import Man from "../../utils/Icons/Man";
+import Money from "../../utils/Icons/Money";
+import Settings from "../../utils/Icons/Settings";
+import Header from "../Header/Header";
 
-import './Profile.css';
+import "./Profile.css";
 
 const Profile = ({ changePage, changePageThunk, ...props }) => {
   const handleEdit = () => {
-    console.log('handleEdit');
+    console.log("handleEdit");
   };
 
   const handleLogOut = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     handleChangePage(1);
   };
 
-  const handleChangePage = pageNumber => {
+  const handleChangePage = (pageNumber) => {
     changePageThunk(pageNumber);
   };
 
@@ -34,7 +34,7 @@ const Profile = ({ changePage, changePageThunk, ...props }) => {
           height={80}
         ></img>
         <div className="edit-svg" onClick={() => handleEdit()}>
-          <Edit />
+          <Edit fill="var(--clr-black)" />
         </div>
       </div>
 
@@ -49,19 +49,19 @@ const Profile = ({ changePage, changePageThunk, ...props }) => {
       <div className="container-profile">
         <div className="menu-profile-row" onClick={() => handleChangePage(5)}>
           <div className="svg">
-            <Man></Man>
+            <Man fill="var(--clr-black)"></Man>
           </div>
           Accessibility
         </div>
         <div className="menu-profile-row" onClick={() => handleChangePage(6)}>
           <div className="svg">
-            <Money></Money>
+            <Money fill="var(--clr-black)"></Money>
           </div>
           Pricing plans
         </div>
         <div className="menu-profile-row" onClick={() => handleChangePage(7)}>
           <div className="svg">
-            <Settings></Settings>
+            <Settings fill="var(--clr-black)"></Settings>
           </div>
           Settings
         </div>
@@ -80,14 +80,14 @@ const Profile = ({ changePage, changePageThunk, ...props }) => {
       <div className="log-out" onClick={() => handleLogOut()}>
         Log Out
         <div className="svg">
-          <LogOut />
+          <LogOut fill="var(--clr-black)" />
         </div>
       </div>
     </>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   changePage: state?.pageState?.changePage,
 });
 

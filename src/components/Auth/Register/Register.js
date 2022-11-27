@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { postRegisterThunk } from '../../../state/thunks/auth.thunk';
-import { changePageThunk } from '../../../state/thunks/page.thunk';
-import Fish from '../../../utils/Icons/aaa.png';
-import AuthWith from '../../Common/AuthWith/AuthWith';
-import './Register.css';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { postRegisterThunk } from "../../../state/thunks/auth.thunk";
+import { changePageThunk } from "../../../state/thunks/page.thunk";
+import Fish from "../../../utils/Icons/Fish";
+import AuthWith from "../../Common/AuthWith/AuthWith";
+import "./Register.css";
 
 const initialData = {
   name: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
   username: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
   email: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
   password: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
 };
@@ -39,12 +39,12 @@ const Register = ({
 
   const renderProfile = () => (
     <div className="profile">
-      <img src={Fish} width={45} height={45} alt="profile"></img>
-      {/* <Fish></Fish> */}
+      {/* <img src={Fish} width={45} height={45} alt="profile"></img> */}
+      <Fish></Fish>
     </div>
   );
 
-  const handleChangePage = pageNumber => {
+  const handleChangePage = (pageNumber) => {
     changePageThunk(pageNumber);
   };
 
@@ -56,7 +56,7 @@ const Register = ({
       [inputName]: {
         ...data[inputName],
         value: inputValue,
-        error: '',
+        error: "",
         isError: false,
       },
     });
@@ -67,22 +67,22 @@ const Register = ({
     let dataCopy = { ...data };
 
     if (!dataCopy.name.value) {
-      dataCopy.name.error = 'This Field is Required';
+      dataCopy.name.error = "This Field is Required";
       dataCopy.name.isError = true;
       isError = true;
     }
     if (!dataCopy.username.value) {
-      dataCopy.username.error = 'This Field is Required';
+      dataCopy.username.error = "This Field is Required";
       dataCopy.username.isError = true;
       isError = true;
     }
     if (!dataCopy.email.value) {
-      dataCopy.email.error = 'This Field is Required';
+      dataCopy.email.error = "This Field is Required";
       dataCopy.email.isError = true;
       isError = true;
     }
     if (!dataCopy.password.value) {
-      dataCopy.password.error = 'This Field is Required';
+      dataCopy.password.error = "This Field is Required";
       dataCopy.password.isError = true;
       isError = true;
     }
@@ -101,7 +101,7 @@ const Register = ({
         password: data.password.value,
       };
       const response = await postRegisterThunk(obj);
-      console.log('response SEND', response);
+      console.log("response SEND", response);
       if (response && response?.status !== 500) {
         handleChangePage(1);
       }
@@ -118,10 +118,10 @@ const Register = ({
             type="text"
             placeholder="First name"
             value={data.name.value}
-            name={'name'}
+            name={"name"}
             onChange={handleChange}
           ></input>
-          <div>{data.name.error}</div>
+          <div className="error-msg">{data.name.error}</div>
         </div>
 
         <div className="lastname">
@@ -129,10 +129,10 @@ const Register = ({
             type="text"
             placeholder="Last name"
             value={data.username.value}
-            name={'username'}
+            name={"username"}
             onChange={handleChange}
           ></input>
-          <div>{data.username.error}</div>
+          <div className="error-msg">{data.username.error}</div>
         </div>
 
         <div className="email">
@@ -140,10 +140,10 @@ const Register = ({
             type="email"
             placeholder="Email address"
             value={data.email.value}
-            name={'email'}
+            name={"email"}
             onChange={handleChange}
           ></input>
-          <div>{data.email.error}</div>
+          <div className="error-msg">{data.email.error}</div>
         </div>
 
         <div className="password">
@@ -151,10 +151,10 @@ const Register = ({
             type="pass"
             placeholder="Create password"
             value={data.password.value}
-            name={'password'}
+            name={"password"}
             onChange={handleChange}
           ></input>
-          <div>{data.password.error}</div>
+          <div className="error-msg">{data.password.error}</div>
         </div>
 
         <button onClick={sendDataToBE} className="register-btn">
@@ -180,7 +180,7 @@ const Register = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   changePage: state?.pageState?.changePage,
 });
 

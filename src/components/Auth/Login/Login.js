@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { postLoginThunk } from '../../../state/thunks/auth.thunk';
-import { changePageThunk } from '../../../state/thunks/page.thunk';
-import AuthWith from '../../Common/AuthWith/AuthWith';
-import './Login.css';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { postLoginThunk } from "../../../state/thunks/auth.thunk";
+import { changePageThunk } from "../../../state/thunks/page.thunk";
+import Fish from "../../../utils/Icons/Fish";
+import AuthWith from "../../Common/AuthWith/AuthWith";
+import "./Login.css";
 
 const initialData = {
   username: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
   password: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
 };
@@ -24,17 +25,12 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
   const renderProfile = () => {
     return (
       <div className="profile">
-        <img
-          src="https://image.shutterstock.com/image-vector/male-profile-picture-avatar-600w-147777698.jpg"
-          width={45}
-          height={45}
-          alt="profile"
-        ></img>
+        <Fish></Fish>
       </div>
     );
   };
 
-  const handleChangePage = pageNumber => {
+  const handleChangePage = (pageNumber) => {
     changePageThunk(pageNumber);
   };
 
@@ -46,7 +42,7 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
       [inputName]: {
         ...data[inputName],
         value: inputValue,
-        error: '',
+        error: "",
         isError: false,
       },
     });
@@ -57,12 +53,12 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
     let dataCopy = { ...data };
 
     if (!dataCopy.username.value) {
-      dataCopy.username.error = 'This Field is Required';
+      dataCopy.username.error = "This Field is Required";
       dataCopy.username.isError = true;
       isError = true;
     }
     if (!dataCopy.password.value) {
-      dataCopy.password.error = 'This Field is Required';
+      dataCopy.password.error = "This Field is Required";
       dataCopy.password.isError = true;
       isError = true;
     }
@@ -78,9 +74,9 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
         username: data.username.value,
         password: data.password.value,
       };
-      console.log('obj', obj);
+      console.log("obj", obj);
       const response = await postLoginThunk(obj);
-      console.log('response SEND', response);
+      console.log("response SEND", response);
       if (response !== undefined) {
         handleChangePage(4);
       }
@@ -97,10 +93,10 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
             type="email"
             placeholder="Username"
             value={data.username.value}
-            name={'username'}
+            name={"username"}
             onChange={handleChange}
           ></input>
-          <div>{data.username.error}</div>
+          <div className="error-msg">{data.username.error}</div>
         </div>
 
         <div className="password">
@@ -108,14 +104,14 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
             type="pass"
             placeholder="Password"
             value={data.password.value}
-            name={'password'}
+            name={"password"}
             onChange={handleChange}
           ></input>
-          <div>{data.password.error}</div>
+          <div className="error-msg">{data.password.error}</div>
         </div>
 
         <div className="login-group">
-          <div className="remember-me">Remember me</div>
+          <div className="remember-me"></div>
           <div onClick={() => handleChangePage(3)} className="forgot-password">
             Forgot Password?
           </div>
@@ -144,7 +140,7 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   changePage: state?.pageState?.changePage,
 });
 
