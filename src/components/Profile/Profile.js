@@ -7,10 +7,14 @@ import Man from "../../utils/Icons/Man";
 import Money from "../../utils/Icons/Money";
 import Settings from "../../utils/Icons/Settings";
 import Header from "../Header/Header";
+import jwt_decode from "jwt-decode";
 
 import "./Profile.css";
 
 const Profile = ({ changePage, changePageThunk, ...props }) => {
+  var token = localStorage.getItem("token");
+  var decoded = jwt_decode(token);
+
   const handleEdit = () => {
     console.log("handleEdit");
   };
@@ -38,7 +42,7 @@ const Profile = ({ changePage, changePageThunk, ...props }) => {
         </div>
       </div>
 
-      <div className="profile-name">Name name</div>
+      <div className="profile-name">{decoded.sub}</div>
 
       <div className="profile-email">myPersonalEmail@yahoo.com</div>
     </section>

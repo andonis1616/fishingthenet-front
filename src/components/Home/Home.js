@@ -4,6 +4,7 @@ import Sword from "../../utils/Icons/Sword";
 import Header from "../Header/Header";
 import jwt_decode from "jwt-decode";
 import "./Home.css";
+import Scut from "../../utils/Icons/Scut";
 
 const Home = ({ ...props }) => {
   var token = localStorage.getItem("token");
@@ -66,6 +67,7 @@ const Home = ({ ...props }) => {
           <div className="attacks-numbers-number">170.000</div>
         </div>
         <img src="wall.png" width={55} height={64} alt="img"></img>
+        <Scut></Scut>
       </div>
     );
   };
