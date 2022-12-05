@@ -8,19 +8,32 @@ import Home from "../Home/Home";
 import PricingPlans from "../PricingPlans/PricingPlans";
 import Profile from "../Profile/Profile";
 import Settings from "../Settings/Settings";
+import jwt_decode from "jwt-decode";
 import "./App.css";
 import "../../utils/Variables/variables.css";
 import useLocalStorage from "use-local-storage";
 import { switchThemeThunk } from "../../state/thunks/theme.thunk";
 import Bottom from "../Bottom/Bottom";
+import { sendEmailThunk } from "../../state/thunks/home.thunk";
 // const optiunePagina = 2;
+var k = 0;
 
-const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
+const App = ({
+  sendEmail,
+  changePage,
+  switchThemeState,
+  switchThemeThunk,
+  sendEmailThunk,
+  ...props
+}) => {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [theme, setTheme] = useLocalStorage(
     "theme",
     defaultDark ? "dark" : "light"
   );
+
+  var token = localStorage.getItem("token");
+  var decoded = jwt_decode(token);
 
   // const switchTheme = () => {
   //   const newTheme = switchThemeState === 'light' ? 'dark' : 'light';
@@ -31,6 +44,11 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
   useEffect(() => {
     switchThemeThunk(theme);
   }, []);
+
+  useEffect(() => {
+    console.log("sendEmailsendEmailsendEmailsendEmailsendEmail", sendEmail);
+  }, [sendEmail]);
+
   // console.log(
   //   'aaaaaaaaaaaaa',
   //   document.querySelector('[data-app-section="MailReadCompose"]'),
@@ -44,7 +62,7 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
 
   // logInnerText(document.querySelector('[data-app-section="MailReadCompose"]'))
 
-  const FUNCTIA_MARE = () => {
+  const FUNCTIA_MARE = async () => {
     console.log("CLICKKKKKKKKKKKKKKKK");
     // Compensate for IE<9's non-standard event model
     //
@@ -54,11 +72,11 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
     // alert('clicked on ' + target.tagName);
 
     // console.log('target@@@@@@@@@@@@@@@@@@@@@@@', target);
-    const TEST = () => {
-      console.log(
-        "CLICK AICIIIIIII",
-        document.querySelector('[data-app-section="MailReadCompose"]')
-      );
+    const TEST = async () => {
+      // console.log(
+      //   "CLICK AICIIIIIII",
+      //   document.querySelector('[data-app-section="MailReadCompose"]')
+      // );
 
       // Get data from browser
 
@@ -91,11 +109,19 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
       );
 
       const SendDataToBE = {
-        title,
-        email,
+        subject: title,
+        sender: email,
         content: dataArray.toString(" "),
+        ownerUsername: decoded.sub,
       };
-      console.log("SendDataToBE!!!!!!!!!!!!", SendDataToBE);
+      console.log("SendDataToBE!!!!!!!!!!!!???", SendDataToBE);
+
+      const res = await sendEmailThunk(SendDataToBE);
+      if (res) k++;
+      console.log(k);
+      console.log(")))))))))))))))))))))))))))))", res);
+      if (res && res.isFishing === true && k === 1)
+        alert("Phishing email detected " + res.sender);
       // end get data
     };
     window.setTimeout(TEST, 3000);
@@ -104,7 +130,7 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
   var elementDOM = document.querySelector('[role="complementary"]');
   if (elementDOM)
     elementDOM.addEventListener("click", (e) => {
-      console.log("ROLE element clicked!!!!!!!!!!!!!!!!!!!!!!!!!!", e);
+      // console.log("ROLE element clicked!!!!!!!!!!!!!!!!!!!!!!!!!!", e);
       FUNCTIA_MARE();
     });
 
@@ -151,10 +177,12 @@ const App = ({ changePage, switchThemeState, switchThemeThunk, ...props }) => {
 const mapStateToProps = (state) => ({
   changePage: state?.pageState?.changePage,
   switchThemeState: state.switchThemeState.switchTheme,
+  sendEmail: state.homeState.sendEmail,
 });
 
 const mapDispatchToProps = {
   switchThemeThunk: switchThemeThunk,
+  sendEmailThunk: sendEmailThunk,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

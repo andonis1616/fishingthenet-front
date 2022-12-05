@@ -5,17 +5,21 @@ import Header from "../Header/Header";
 import jwt_decode from "jwt-decode";
 import "./Home.css";
 import Scut from "../../utils/Icons/Scut";
+import { homeThunk } from "../../state/thunks/home.thunk";
 
-const Home = ({ ...props }) => {
+const Home = ({ sendEmail, home, homeThunk, ...props }) => {
   var token = localStorage.getItem("token");
   var decoded = jwt_decode(token);
 
   useEffect(() => {
+    //apeleaza api home
+    homeThunk();
+
     let circularProgress = document.querySelector(".circular-progress"),
       progressValue = document.querySelector(".progress-value");
 
     let progressStartValue = 0,
-      progressEndValue = 90,
+      progressEndValue = 1, //schimbat
       speed = 15;
 
     let progress = setInterval(() => {
@@ -31,6 +35,35 @@ const Home = ({ ...props }) => {
       }
     }, speed);
   }, []);
+
+  useEffect(() => {
+    let circularProgress = document.querySelector(".circular-progress"),
+      progressValue = document.querySelector(".progress-value");
+
+    let progressStartValue = 0,
+      progressEndValue =
+        home.percentage === 0 || home.percentage === undefined
+          ? 1
+          : home.percentage, //schimbat
+      speed = 15;
+
+    let progress = setInterval(() => {
+      progressStartValue++;
+
+      progressValue.textContent = `${progressStartValue}%`;
+      circularProgress.style.background = `conic-gradient(var(--clr-blue-light) ${
+        progressStartValue * 3.6
+      }deg, var(--clr-white) 0deg)`;
+
+      if (progressStartValue == progressEndValue) {
+        clearInterval(progress);
+      }
+    }, speed);
+  }, [home]);
+
+  useEffect(() => {
+    console.log("Home sendEmail !!!!!!!!!!!!!!!!!!!!!", sendEmail);
+  }, [sendEmail]);
 
   const renderCircular = () => {
     return (
@@ -54,7 +87,9 @@ const Home = ({ ...props }) => {
           <div className="attacks-frequent-text">
             Most frequent attack source
           </div>
-          <div className="attacks-frequent-number">Russia</div>
+          <div className="attacks-frequent-number">
+            {home.mostfrequentCountry}
+          </div>
         </div>
       </div>
     );
@@ -64,9 +99,10 @@ const Home = ({ ...props }) => {
       <div className="attacks-numbers">
         <div className="numbers">
           <div className="attacks-numbers-text">Number of attempts</div>
-          <div className="attacks-numbers-number">170.000</div>
+          <div className="attacks-numbers-number">
+            {home.numberOfFishingEmails}
+          </div>
         </div>
-        <img src="wall.png" width={55} height={64} alt="img"></img>
         <Scut></Scut>
       </div>
     );
@@ -92,8 +128,13 @@ const Home = ({ ...props }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  home: state?.homeState?.home,
+  sendEmail: state.homeState.sendEmail,
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  homeThunk: homeThunk,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
