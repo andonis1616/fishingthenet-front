@@ -52,7 +52,7 @@ input::after {
 }
 
 input:checked {
-    background-color: rgb(141, 221, 141);
+    background-color: #4D4D4D;
 }
 
 input:checked::after {

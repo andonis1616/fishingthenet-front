@@ -1,5 +1,7 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import useLocalStorage from 'use-local-storage';
 import Danger from '../../utils/Icons/Danger';
 import Email from '../../utils/Icons/Email';
 import Square from '../../utils/Icons/Square';
@@ -8,28 +10,33 @@ import Header from '../Header/Header';
 import './Settings.css';
 
 const Settings = ({ ...props }) => {
-  const mockData = [
-    {
-      id: 1,
-      svg: <Email></Email>,
-      text: 'Color blind mode',
-    },
-    {
-      id: 2,
-      svg: <Danger></Danger>,
-      text: 'Show danger percentage',
-    },
-    {
-      id: 3,
-      svg: <Square></Square>,
-      text: 'Debug mode',
-    },
-    {
-      id: 4,
-      svg: <Square></Square>,
-      text: 'Another setting',
-    },
-  ];
+  const [checkedE, setCheckedE] = React.useState(false);
+  const [checkedShowPercentage, setCheckedShowPercentage] = React.useState(
+    true,
+  );
+  const [checkedDebug, setCheckedDebug] = React.useState(true);
+
+  const [debug, setDebug] = useLocalStorage('debug', true);
+  const [showPercentage, setShowPercentage] = useLocalStorage(
+    'showPercentage',
+    true,
+  );
+
+  useEffect(() => {
+    setCheckedShowPercentage(showPercentage ? true : false);
+    setCheckedDebug(debug ? true : false);
+  }, []);
+
+  const handleShowPercentage = () => {
+    console.log('showPercentage', showPercentage);
+    setCheckedShowPercentage(!showPercentage);
+    setShowPercentage(!showPercentage);
+  };
+  const handleDebug = () => {
+    console.log('debug', debug);
+    setCheckedDebug(!debug);
+    setDebug(!debug);
+  };
 
   return (
     <>
@@ -37,15 +44,49 @@ const Settings = ({ ...props }) => {
       <h1>Settings</h1>
       <div className="settings-group">
         <div className="container">
-          {mockData.map((item, index) => (
-            <div key={index} className="settings-row">
-              <div className="svg">{item.svg}</div>
-              {item.text}
-              <div className="toggle">
-                <input type="checkbox" />
-              </div>
+          <div className="settings-row">
+            <div className="svg">
+              <Email></Email>
             </div>
-          ))}
+            <span>Display alerts in Outlook</span>
+            <div className="toggle">
+              <input
+                aria-label="checkbox for Display alerts in Outlook"
+                type="checkbox"
+                checked={checkedE}
+              />
+            </div>
+          </div>
+
+          <div className="settings-row">
+            <div className="svg">
+              <Danger></Danger>
+            </div>
+            <span>Show danger percentage</span>
+            <div className="toggle">
+              <input
+                aria-label="checkbox for Show danger percentage"
+                type="checkbox"
+                checked={checkedShowPercentage}
+                onChange={handleShowPercentage}
+              />
+            </div>
+          </div>
+
+          <div className="settings-row">
+            <div className="svg">
+              <Square></Square>
+            </div>
+            <span>Debug mode</span>
+            <div className="toggle">
+              <input
+                aria-label="checkbox for Debug mode"
+                type="checkbox"
+                checked={checkedDebug}
+                onChange={handleDebug}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>

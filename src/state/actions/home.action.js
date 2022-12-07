@@ -1,4 +1,5 @@
 export const FETCH_HOME = 'FETCH_HOME';
+export const FETCH_CHART = 'FETCH_CHART';
 export const POST_SEND_EMAIL = 'POST_SEND_EMAIL';
 
 /**
@@ -14,3 +15,7 @@ export const sendEmailAction = send => ({
   payload: send,
 });
 
+export const fetchChartAction = chart => ({
+  type: FETCH_CHART,
+  payload: chart,
+});

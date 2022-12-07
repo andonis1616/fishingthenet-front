@@ -1,31 +1,49 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import useLocalStorage from "use-local-storage";
-import { switchThemeThunk } from "../../state/thunks/theme.thunk";
-import Eye from "../../utils/Icons/Eye";
-import Keyboard from "../../utils/Icons/Keyboard";
-import Moon from "../../utils/Icons/Moon";
-import Header from "../Header/Header";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import useLocalStorage from 'use-local-storage';
+import { switchThemeThunk } from '../../state/thunks/theme.thunk';
+import Eye from '../../utils/Icons/Eye';
+import Keyboard from '../../utils/Icons/Keyboard';
+import Moon from '../../utils/Icons/Moon';
+import Header from '../Header/Header';
 
-import "./Accessibility.css";
+import './Accessibility.css';
 
 const Accessibility = ({ switchThemeState, switchThemeThunk, ...props }) => {
   const [checked, setChecked] = React.useState(false);
-  const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [checkedBlind, setCheckedBlind] = React.useState(false);
+
+  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const defaultBlind = window.matchMedia('(prefers-color-scheme: blind)')
+    .matches;
+  // console.log('defaultDark', defaultDark);
+  // console.log('defaultBlind', defaultBlind);
   const [theme, setTheme] = useLocalStorage(
-    "theme",
-    defaultDark ? "dark" : "light"
+    'theme',
+    defaultDark ? 'dark' : defaultBlind ? 'blind' : 'light',
   );
 
   useEffect(() => {
-    switchThemeState === "dark" && setChecked(true);
+    // console.log('switchThemeState', switchThemeState);
+    switchThemeState === 'dark' && setChecked(true);
+    switchThemeState === 'blind' && setCheckedBlind(true);
   }, []);
 
   const switchTheme = () => {
+    setCheckedBlind(false);
     setChecked(!checked);
-    const newTheme = switchThemeState === "light" ? "dark" : "light";
+    const newTheme = !checked ? 'dark' : 'light';
     setTheme(newTheme);
     switchThemeThunk(newTheme);
+  };
+
+  const switchThemeToBlind = () => {
+    // console.log('checkedBlind', checkedBlind);
+    setChecked(false);
+    setCheckedBlind(!checkedBlind);
+    const newThemeBlind = !checkedBlind ? 'blind' : 'light';
+    setTheme(newThemeBlind);
+    switchThemeThunk(newThemeBlind);
   };
 
   return (
@@ -38,9 +56,10 @@ const Accessibility = ({ switchThemeState, switchThemeThunk, ...props }) => {
             <div className="svg">
               <Moon fill="var(--clr-black)"></Moon>
             </div>
-            Dark mode
+            <p aria-label="Dark mode">Dark mode</p>
             <div className="toggle">
               <input
+                aria-label="checkbox for dark mode"
                 className="checkbox-dark-mode"
                 type="checkbox"
                 checked={checked}
@@ -53,9 +72,14 @@ const Accessibility = ({ switchThemeState, switchThemeThunk, ...props }) => {
             <div className="svg">
               <Eye fill="var(--clr-black)"></Eye>
             </div>
-            Color blind mode
+            <p aria-label="Color blind mode">Color blind mode</p>
             <div className="toggle">
-              <input type="checkbox" />
+              <input
+                aria-label="checkbox for Color blind mode"
+                type="checkbox"
+                checked={checkedBlind}
+                onChange={switchThemeToBlind}
+              />
             </div>
           </div>
 
@@ -72,7 +96,7 @@ const Accessibility = ({ switchThemeState, switchThemeThunk, ...props }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   switchThemeState: state.switchThemeState.switchTheme,
 });
 

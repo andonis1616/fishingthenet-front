@@ -23,3 +23,12 @@
     --clr-blue-light: #BB86FC;
     --clr-blue-dark: #BB86FC;
 }
+
+[data-theme='blind'] {
+    --clr-background: #FDECF1;
+    --clr-white: #FFFFFF;
+    --clr-gray: #CCCCCC;
+    --clr-black: #000000;
+    --clr-blue-light: #6F8BC6;
+    --clr-blue-dark: #6F8BC6;
+}

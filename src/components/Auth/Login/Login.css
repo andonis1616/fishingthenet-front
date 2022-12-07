@@ -41,7 +41,8 @@
 }
 .error-msg {
     position: absolute;
-    top: 47px;
+    top: 29px;
+    left: 0;
     color: brown;
 }
 .login-wrapper .email input,
@@ -123,7 +124,7 @@ margin: 8px 0;
 .auth-with {
     width: 100%;
 }
-.auth-with-group {
+/* .auth-with-group {
     background: var(--clr-white);
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 6px;
@@ -142,11 +143,10 @@ margin: 8px 0;
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
-    line-height: 24px;
-    /* identical to box height, or 185% */
+    line-height: 24px; 
 
     letter-spacing: -0.015em;
 
     color: rgba(0, 0, 0, 0.5);
     padding-left: 21px;
-}
+} */

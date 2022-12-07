@@ -1,20 +1,22 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import Accessibility from "../Accessibility/Accessibility";
-import ForgotPassword from "../Auth/ForgotPassword/ForgotPassword";
-import Login from "../Auth/Login/Login";
-import Register from "../Auth/Register/Register";
-import Home from "../Home/Home";
-import PricingPlans from "../PricingPlans/PricingPlans";
-import Profile from "../Profile/Profile";
-import Settings from "../Settings/Settings";
-import jwt_decode from "jwt-decode";
-import "./App.css";
-import "../../utils/Variables/variables.css";
-import useLocalStorage from "use-local-storage";
-import { switchThemeThunk } from "../../state/thunks/theme.thunk";
-import Bottom from "../Bottom/Bottom";
-import { sendEmailThunk } from "../../state/thunks/home.thunk";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import Accessibility from '../Accessibility/Accessibility';
+import ForgotPassword from '../Auth/ForgotPassword/ForgotPassword';
+import Login from '../Auth/Login/Login';
+import Register from '../Auth/Register/Register';
+import Home from '../Home/Home';
+import PricingPlans from '../PricingPlans/PricingPlans';
+import Profile from '../Profile/Profile';
+import Settings from '../Settings/Settings';
+import jwt_decode from 'jwt-decode';
+import './App.css';
+import '../../utils/Variables/variables.css';
+import useLocalStorage from 'use-local-storage';
+import { switchThemeThunk } from '../../state/thunks/theme.thunk';
+import Bottom from '../Bottom/Bottom';
+import { sendEmailThunk } from '../../state/thunks/home.thunk';
+import CAlert from '../../utils/Icons/CAlert';
+import X from '../../utils/Icons/X';
 // const optiunePagina = 2;
 var k = 0;
 
@@ -26,14 +28,16 @@ const App = ({
   sendEmailThunk,
   ...props
 }) => {
-  const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const defaultBlind = window.matchMedia('(prefers-color-scheme: blind)')
+    .matches;
   const [theme, setTheme] = useLocalStorage(
-    "theme",
-    defaultDark ? "dark" : "light"
+    'theme',
+    defaultDark ? 'dark' : defaultBlind ? 'blind' : 'light',
   );
+  const [showAlert, setShowAlert] = useLocalStorage('showAlert', false);
 
-  var token = localStorage.getItem("token");
-  var decoded = jwt_decode(token);
+  var token = localStorage.getItem('token');
 
   // const switchTheme = () => {
   //   const newTheme = switchThemeState === 'light' ? 'dark' : 'light';
@@ -46,7 +50,7 @@ const App = ({
   }, []);
 
   useEffect(() => {
-    console.log("sendEmailsendEmailsendEmailsendEmailsendEmail", sendEmail);
+    // console.log('sendEmailsendEmailsendEmailsendEmailsendEmail', sendEmail);
   }, [sendEmail]);
 
   // console.log(
@@ -63,7 +67,7 @@ const App = ({
   // logInnerText(document.querySelector('[data-app-section="MailReadCompose"]'))
 
   const FUNCTIA_MARE = async () => {
-    console.log("CLICKKKKKKKKKKKKKKKK");
+    console.log('CLICKKKKKKKKKKKKKKKK');
     // Compensate for IE<9's non-standard event model
     //
     // if (event === undefined) event = window.event;
@@ -81,8 +85,8 @@ const App = ({
       // Get data from browser
 
       const dataArray = [];
-      var title = "";
-      var email = "";
+      var title = '';
+      var email = '';
       var count = 0;
 
       function logInnerText(elem, index = undefined) {
@@ -105,36 +109,50 @@ const App = ({
       }
 
       logInnerText(
-        document.querySelector('[data-app-section="MailReadCompose"]')
+        document.querySelector('[data-app-section="MailReadCompose"]'),
       );
+
+      var decoded = jwt_decode(token);
 
       const SendDataToBE = {
         subject: title,
         sender: email,
-        content: dataArray.toString(" "),
+        content: dataArray.toString(' '),
         ownerUsername: decoded.sub,
       };
-      console.log("SendDataToBE!!!!!!!!!!!!???", SendDataToBE);
+      console.log('SendDataToBE!!!!!!!!!!!!???', SendDataToBE);
 
       const res = await sendEmailThunk(SendDataToBE);
       if (res) k++;
-      console.log(k);
-      console.log(")))))))))))))))))))))))))))))", res);
-      if (res && res.isFishing === true && k === 1)
-        alert("Phishing email detected " + res.sender);
+      // console.log(k);
+      console.log(')))))))))))))))))))))))))))))', res);
+      // if (res && res.isFishing === true && k === 1)
+      //   alert(`Phishing email detected ${res.sender}`);
+
+      if (res && res.isFishing === true && k === 1) {
+        setShowAlert(true);
+        localStorage.setItem('showAlert', 'true');
+      }
+
+      if (res && res.isFishing === true) {
+        setShowAlert(true);
+        localStorage.setItem('showAlert', 'true');
+      }
+
       // end get data
     };
     window.setTimeout(TEST, 3000);
   };
 
   var elementDOM = document.querySelector('[role="complementary"]');
+  // var elementDOM = document.querySelector('.container-home');
   if (elementDOM)
-    elementDOM.addEventListener("click", (e) => {
-      // console.log("ROLE element clicked!!!!!!!!!!!!!!!!!!!!!!!!!!", e);
+    elementDOM.addEventListener('click', e => {
+      console.log('ROLE element clicked!!!!!!!!!!!!!!!!!!!!!!!!!!', e);
       FUNCTIA_MARE();
     });
 
-  const renderComponent = (option) => {
+  const renderComponent = option => {
     switch (option) {
       case 1:
         return <Login />;
@@ -168,13 +186,23 @@ const App = ({
   return (
     <div className="app" data-theme={switchThemeState}>
       {renderComponent(changePage)}
-
+      {showAlert === true && (
+        <section className="custom-alert">
+          <div className="alert-svg">
+            <CAlert></CAlert>
+          </div>
+          <p>{`Phishing email detected `}</p>
+          <div onClick={() => setShowAlert(false)}>
+            <X></X>
+          </div>
+        </section>
+      )}
       <Bottom></Bottom>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   changePage: state?.pageState?.changePage,
   switchThemeState: state.switchThemeState.switchTheme,
   sendEmail: state.homeState.sendEmail,

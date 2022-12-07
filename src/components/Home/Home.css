@@ -15,6 +15,9 @@
     padding: 13px 30px;
     margin-bottom: 24px;
 }
+.circular-progress-container-hide {
+    visibility: hidden;
+}
 
 .circular-progress {
     position: relative;
@@ -49,6 +52,7 @@
     font-size: 16px;
     line-height: 19px;
     text-align: right;
+    margin: 0;
     
     color: var(--clr-black);
 }
@@ -65,7 +69,7 @@
 
 /* attacks */
  
-
+.attacks-chart,
 .attacks-frequent ,
 .attacks-numbers {
     background: var(--clr-white);
@@ -85,7 +89,7 @@
     font-size: 16px;
     line-height: 19px;
     margin-bottom: 10px;
-
+margin-top: 0;
 
     opacity: 0.7;
 }
@@ -95,7 +99,7 @@
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
-    
+    margin: 0;
     
     opacity: 0.8;
 }
@@ -111,4 +115,40 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.clearInput {
+    cursor: auto;
+    margin: auto;
+    position: relative;
+    width: auto;
+    height:  auto;
+    border-radius: 0;
+    outline: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    transition: none;
+}
+
+.clearInput::after {
+    content: '';
+    position: relative;
+  
+    /* transform: translate(-50%, -50%); */
+    border-radius: 0;
+    height: auto;
+    width: auto;
+    background-color: transparent;
+    transition: none;
+}
+
+.btn-chart {
+    background: #5770A8;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 3px 14px ;
+    margin-right: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
 }

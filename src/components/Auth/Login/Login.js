@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { postLoginThunk } from "../../../state/thunks/auth.thunk";
-import { changePageThunk } from "../../../state/thunks/page.thunk";
-import Fish from "../../../utils/Icons/Fish";
-import AuthWith from "../../Common/AuthWith/AuthWith";
-import "./Login.css";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { postLoginThunk } from '../../../state/thunks/auth.thunk';
+import { changePageThunk } from '../../../state/thunks/page.thunk';
+import Fish from '../../../utils/Icons/Fish';
+import AuthWith from '../../Common/AuthWith/AuthWith';
+import './Login.css';
 
 const initialData = {
   username: {
-    value: "",
-    error: "",
+    value: '',
+    error: '',
     isError: false,
   },
   password: {
-    value: "",
-    error: "",
+    value: '',
+    error: '',
     isError: false,
   },
 };
@@ -30,7 +30,7 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
     );
   };
 
-  const handleChangePage = (pageNumber) => {
+  const handleChangePage = pageNumber => {
     changePageThunk(pageNumber);
   };
 
@@ -42,7 +42,7 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
       [inputName]: {
         ...data[inputName],
         value: inputValue,
-        error: "",
+        error: '',
         isError: false,
       },
     });
@@ -53,12 +53,12 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
     let dataCopy = { ...data };
 
     if (!dataCopy.username.value) {
-      dataCopy.username.error = "This Field is Required";
+      dataCopy.username.error = 'This Field is Required';
       dataCopy.username.isError = true;
       isError = true;
     }
     if (!dataCopy.password.value) {
-      dataCopy.password.error = "This Field is Required";
+      dataCopy.password.error = 'This Field is Required';
       dataCopy.password.isError = true;
       isError = true;
     }
@@ -74,9 +74,9 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
         username: data.username.value,
         password: data.password.value,
       };
-      console.log("obj", obj);
+      // console.log('obj', obj);
       const response = await postLoginThunk(obj);
-      console.log("response SEND", response);
+      // console.log('response SEND', response);
       if (response !== undefined) {
         handleChangePage(4);
       }
@@ -86,37 +86,43 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
   const renderLogin = () => {
     return (
       <div className="login-wrapper">
-        <div className="login">Log in</div>
+        <h1 className="login">Log in</h1>
+        <fieldset>
+          <label htmlFor="username" className="email">
+            <input
+              aria-label="Enter your username"
+              type="email"
+              placeholder="Username"
+              value={data.username.value}
+              name={'username'}
+              onChange={handleChange}
+            ></input>
+            <div className="error-msg">{data.username.error}</div>
+          </label>
 
-        <div className="email">
-          <input
-            type="email"
-            placeholder="Username"
-            value={data.username.value}
-            name={"username"}
-            onChange={handleChange}
-          ></input>
-          <div className="error-msg">{data.username.error}</div>
-        </div>
+          <label htmlFor="password" className="password">
+            <input
+              aria-label="Enter your password"
+              id="password"
+              type="pass"
+              placeholder="Password"
+              value={data.password.value}
+              name={'password'}
+              onChange={handleChange}
+            ></input>
+            <div className="error-msg">{data.password.error}</div>
+          </label>
 
-        <div className="password">
-          <input
-            type="pass"
-            placeholder="Password"
-            value={data.password.value}
-            name={"password"}
-            onChange={handleChange}
-          ></input>
-          <div className="error-msg">{data.password.error}</div>
-        </div>
-
-        <div className="login-group">
-          <div className="remember-me"></div>
-          <div onClick={() => handleChangePage(3)} className="forgot-password">
-            Forgot Password?
-          </div>
-        </div>
-
+          {/* <div className="login-group">
+            <div className="remember-me"></div>
+            <div
+              onClick={() => handleChangePage(3)}
+              className="htmlForgot-password"
+            >
+              htmlForgot Password?
+            </div>
+          </div> */}
+        </fieldset>
         <button onClick={login} className="login-btn">
           Log in
         </button>
@@ -140,7 +146,7 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   changePage: state?.pageState?.changePage,
 });
 

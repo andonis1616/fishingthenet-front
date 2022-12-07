@@ -41,6 +41,8 @@ export const postLoginThunk = data => async dispatch => {
       const user = jwt(token); // decode your token here
       console.log('user', user);
       localStorage.setItem('token', token);
+      localStorage.setItem('debug', true);
+      localStorage.setItem('showPercentage', true);
       // dispatch(fetchSkillsCategory(response));
       return user;
     })

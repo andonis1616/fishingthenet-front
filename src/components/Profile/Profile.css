@@ -74,6 +74,16 @@
     display: flex;
     justify-content: center;
 }
+.menu-profile .menu-profile-row a {
+   text-decoration: none;
+   font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #000000;
+}
 
 /* Log Out */
 .hr {
@@ -84,6 +94,8 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    background: transparent;
+    border: none;
 
     font-family: 'Inter';
     font-style: normal;

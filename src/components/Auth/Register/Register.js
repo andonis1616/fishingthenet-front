@@ -1,30 +1,30 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { postRegisterThunk } from "../../../state/thunks/auth.thunk";
-import { changePageThunk } from "../../../state/thunks/page.thunk";
-import Fish from "../../../utils/Icons/Fish";
-import AuthWith from "../../Common/AuthWith/AuthWith";
-import "./Register.css";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { postRegisterThunk } from '../../../state/thunks/auth.thunk';
+import { changePageThunk } from '../../../state/thunks/page.thunk';
+import Fish from '../../../utils/Icons/Fish';
+import AuthWith from '../../Common/AuthWith/AuthWith';
+import './Register.css';
 
 const initialData = {
   name: {
-    value: "",
-    error: "",
+    value: '',
+    error: '',
     isError: false,
   },
   username: {
-    value: "",
-    error: "",
+    value: '',
+    error: '',
     isError: false,
   },
   email: {
-    value: "",
-    error: "",
+    value: '',
+    error: '',
     isError: false,
   },
   password: {
-    value: "",
-    error: "",
+    value: '',
+    error: '',
     isError: false,
   },
 };
@@ -44,7 +44,7 @@ const Register = ({
     </div>
   );
 
-  const handleChangePage = (pageNumber) => {
+  const handleChangePage = pageNumber => {
     changePageThunk(pageNumber);
   };
 
@@ -56,7 +56,7 @@ const Register = ({
       [inputName]: {
         ...data[inputName],
         value: inputValue,
-        error: "",
+        error: '',
         isError: false,
       },
     });
@@ -67,22 +67,22 @@ const Register = ({
     let dataCopy = { ...data };
 
     if (!dataCopy.name.value) {
-      dataCopy.name.error = "This Field is Required";
+      dataCopy.name.error = 'This Field is Required';
       dataCopy.name.isError = true;
       isError = true;
     }
     if (!dataCopy.username.value) {
-      dataCopy.username.error = "This Field is Required";
+      dataCopy.username.error = 'This Field is Required';
       dataCopy.username.isError = true;
       isError = true;
     }
     if (!dataCopy.email.value) {
-      dataCopy.email.error = "This Field is Required";
+      dataCopy.email.error = 'This Field is Required';
       dataCopy.email.isError = true;
       isError = true;
     }
     if (!dataCopy.password.value) {
-      dataCopy.password.error = "This Field is Required";
+      dataCopy.password.error = 'This Field is Required';
       dataCopy.password.isError = true;
       isError = true;
     }
@@ -101,8 +101,9 @@ const Register = ({
         password: data.password.value,
       };
       const response = await postRegisterThunk(obj);
-      console.log("response SEND", response);
+      // console.log('response SEND', response);
       if (response && response?.status !== 500) {
+        // console.log('response SEND222222222222222', response);
         handleChangePage(1);
       }
     }
@@ -111,51 +112,61 @@ const Register = ({
   const renderRegister = () => {
     return (
       <div className="register-wrapper">
-        <div className="register">Sign up</div>
+        <h1 className="register">Sign up</h1>
 
-        <div className="firstname">
-          <input
-            type="text"
-            placeholder="First name"
-            value={data.name.value}
-            name={"name"}
-            onChange={handleChange}
-          ></input>
-          <div className="error-msg">{data.name.error}</div>
-        </div>
+        <fieldset>
+          <label htmlFor="name" className="firstname">
+            <input
+              id="name"
+              aria-label="Enter your first name"
+              type="text"
+              placeholder="First name"
+              value={data.name.value}
+              name={'name'}
+              onChange={handleChange}
+            ></input>
+            <span className="error-msg">{data.name.error}</span>
+          </label>
 
-        <div className="lastname">
-          <input
-            type="text"
-            placeholder="Last name"
-            value={data.username.value}
-            name={"username"}
-            onChange={handleChange}
-          ></input>
-          <div className="error-msg">{data.username.error}</div>
-        </div>
+          <label htmlFor="username" className="lastname">
+            <input
+              aria-label="Enter your last name"
+              id="username"
+              type="text"
+              placeholder="Last name"
+              value={data.username.value}
+              name={'username'}
+              onChange={handleChange}
+            ></input>
+            <span className="error-msg">{data.username.error}</span>
+          </label>
 
-        <div className="email">
-          <input
-            type="email"
-            placeholder="Email address"
-            value={data.email.value}
-            name={"email"}
-            onChange={handleChange}
-          ></input>
-          <div className="error-msg">{data.email.error}</div>
-        </div>
+          <label htmlFor="email" className="email">
+            <input
+              aria-label="Enter your email adress"
+              id="email"
+              type="email"
+              placeholder="Email address"
+              value={data.email.value}
+              name={'email'}
+              onChange={handleChange}
+            ></input>
+            <span className="error-msg">{data.email.error}</span>
+          </label>
 
-        <div className="password">
-          <input
-            type="pass"
-            placeholder="Create password"
-            value={data.password.value}
-            name={"password"}
-            onChange={handleChange}
-          ></input>
-          <div className="error-msg">{data.password.error}</div>
-        </div>
+          <label htmlFor="password" className="password">
+            <input
+              aria-label="Enter your password"
+              id="password"
+              type="pass"
+              placeholder="Create password"
+              value={data.password.value}
+              name={'password'}
+              onChange={handleChange}
+            ></input>
+            <span className="error-msg">{data.password.error}</span>
+          </label>
+        </fieldset>
 
         <button onClick={sendDataToBE} className="register-btn">
           Sign up
@@ -180,7 +191,7 @@ const Register = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   changePage: state?.pageState?.changePage,
 });
 

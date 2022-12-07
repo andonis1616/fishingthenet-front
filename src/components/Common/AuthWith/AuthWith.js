@@ -19,19 +19,20 @@ const AuthWith = ({
 
   return (
     <div className="auth-with">
-      <div className="auth-with-group">
+      <button aria-label="Continue with Google" className="auth-with-group">
         <GoogleIcon></GoogleIcon>
-        <div className="text">Continue with Google</div>
-      </div>
+        <span className="text">Continue with Google</span>
+      </button>
 
-      <div className="auth-with-group">
+      <button aria-label="Continue with GitHub" className="auth-with-group">
         <GitHubIcon></GitHubIcon>
-        <div className="text">Continue with GitHub</div>
-      </div>
+        <span className="text">Continue with GitHub</span>
+      </button>
 
       <div className="auth-with-group-text">
-        <div className="auth-with-text">{question}</div>
-        <div
+        <span className="auth-with-text">{question}</span>
+        <a
+          href="javascript:void(0)"
           className="auth-with-link"
           onClick={() =>
             questionLink === 'Log in'
@@ -40,7 +41,7 @@ const AuthWith = ({
           }
         >
           {questionLink}
-        </div>
+        </a>
       </div>
     </div>
   );
