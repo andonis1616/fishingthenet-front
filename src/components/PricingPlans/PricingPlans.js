@@ -29,7 +29,7 @@ const PricingPlans = ({ ...props }) => {
           <div className="pricing-plans-svg">
             <Check></Check>
           </div>
-          Accessible security
+          Accessible and secure
         </div>
       </div>
     </div>
@@ -37,8 +37,8 @@ const PricingPlans = ({ ...props }) => {
 
   const renderStandard = () => (
     <div className="pricing-plans-card">
-      <div className="pricing-plans">Free</div>
-      <div className="pricing-plans-price">$0</div>
+      <div className="pricing-plans">Standard</div>
+      <div className="pricing-plans-price">$20/month</div>
       <div className="pricing-plans-group">
         <div className="pricing-plans-text">
           <div className="pricing-plans-svg">
@@ -56,8 +56,14 @@ const PricingPlans = ({ ...props }) => {
           <div className="pricing-plans-svg">
             <Check></Check>
           </div>
-          Accessible security
+          Accessible and secure
         </div>
+        <div className="pricing-plans-text">
+          <div className="pricing-plans-svg">
+            <Check></Check>
+          </div>
+          Getting tehnical support 24/7
+        </div>  
       </div>
     </div>
   );
@@ -65,7 +71,7 @@ const PricingPlans = ({ ...props }) => {
   const renderPremium = () => (
     <div className="pricing-plans-card">
       <div className="pricing-plans">Premium</div>
-      <div className="pricing-plans-price">$55</div>
+      <div className="pricing-plans-price">$55/month</div>
       <div className="pricing-plans-group">
         <div className="pricing-plans-text">
           <div className="pricing-plans-svg">
@@ -85,21 +91,21 @@ const PricingPlans = ({ ...props }) => {
           <div className="pricing-plans-svg">
             <Check></Check>
           </div>
-          Accessible security
+          Accessible and secure
         </div>
 
         <div className="pricing-plans-text">
           <div className="pricing-plans-svg">
             <Check></Check>
           </div>
-          Accessible security
+          Getting tehnical support 24/7
         </div>
 
         <div className="pricing-plans-text">
           <div className="pricing-plans-svg">
             <Check></Check>
           </div>
-          Accessible security
+          Custom deployment
         </div>
       </div>
     </div>
@@ -117,7 +123,7 @@ const PricingPlans = ({ ...props }) => {
       </thead>
       <tbody>
         <tr>
-          <td>Accessible security</td>
+          <td>Easily identifying threat</td>
           <td>
             <CheckGreen></CheckGreen>
           </td>
@@ -129,7 +135,7 @@ const PricingPlans = ({ ...props }) => {
           </td>
         </tr>
         <tr>
-          <td>Accessible security</td>
+          <td>Phishing awareness</td>
           <td>
             <CheckGreen></CheckGreen>
           </td>
@@ -141,31 +147,31 @@ const PricingPlans = ({ ...props }) => {
           </td>
         </tr>
         <tr>
-          <td>Accessible</td>
+          <td>Accessible and secure</td>
+          <td>
+          <CheckGreen></CheckGreen>
+          </td>
+          <td>
+            <CheckGreen></CheckGreen>
+          </td>
+          <td>
+            <CheckGreen></CheckGreen>
+          </td>
+        </tr>
+        <tr>
+          <td>Getting tehnical support 24/7</td>
           <td>
             <Line></Line>
           </td>
           <td>
-            <CheckGreen></CheckGreen>
+          <CheckGreen></CheckGreen>
           </td>
           <td>
             <CheckGreen></CheckGreen>
           </td>
         </tr>
         <tr>
-          <td>Security</td>
-          <td>
-            <Line></Line>
-          </td>
-          <td>
-            <Line></Line>
-          </td>
-          <td>
-            <CheckGreen></CheckGreen>
-          </td>
-        </tr>
-        <tr>
-          <td>Accessible</td>
+          <td>Custom deployment</td>
           <td>
             <Line></Line>
           </td>
