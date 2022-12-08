@@ -1,10 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { changePageThunk } from '../../state/thunks/page.thunk';
-import FB from '../../utils/Icons/FB';
-import Insta from '../../utils/Icons/Insta';
+import React from "react";
+import { connect } from "react-redux";
+import { changePageThunk } from "../../state/thunks/page.thunk";
+import FB from "../../utils/Icons/FB";
+import Insta from "../../utils/Icons/Insta";
 
-import './Bottom.css';
+import "./Bottom.css";
 
 const Bottom = ({ ...props }) => {
   return (
@@ -13,7 +13,7 @@ const Bottom = ({ ...props }) => {
         Our blog:
         <a
           aria-label="like to website fishingnet.com"
-          href="javascript:void(0)"
+          href="http://fishingthenet.bitdestroyer.com:8080"
         >
           http://www.fishingnet.com
         </a>
@@ -26,7 +26,7 @@ const Bottom = ({ ...props }) => {
   );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {};
 
