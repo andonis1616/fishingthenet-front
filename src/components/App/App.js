@@ -68,7 +68,7 @@ const App = ({
   // logInnerText(document.querySelector('[data-app-section="MailReadCompose"]'))
 
   const FUNCTIA_MARE = async () => {
-    console.log("CLICKKKKKKKKKKKKKKKK 1");
+    // console.log("CLICKKKKKKKKKKKKKKKK 1");
     // Compensate for IE<9's non-standard event model
     //
     // if (event === undefined) event = window.event;
@@ -121,7 +121,7 @@ const App = ({
         content: dataArray.toString(" "),
         ownerUsername: decoded.sub,
       };
-      console.log("SendDataToBE 111111111111111", SendDataToBE);
+      // console.log("SendDataToBE 111111111111111", SendDataToBE);
 
       const res = await sendEmailThunk(SendDataToBE);
       if (res) k++;
@@ -131,11 +131,13 @@ const App = ({
       //   alert(`Phishing email detected ${res.sender}`);
 
       if (res && res.isFishing === true && k === 1) {
+        console.log("aici 1");
         setShowAlert(true);
         localStorage.setItem("showAlert", "true");
       }
 
       if (res && res.isFishing === true) {
+        console.log("aici altu 1");
         setShowAlert(true);
         localStorage.setItem("showAlert", "true");
       }
@@ -150,7 +152,7 @@ const App = ({
 
   if (elementDOM) {
     elementDOM.addEventListener("click", (e) => {
-      console.log("ROLE element clicked 1", e);
+      // console.log("ROLE element clicked 1", e);
       FUNCTIA_MARE();
     });
   }
