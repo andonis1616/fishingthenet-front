@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { changePageThunk } from '../../../state/thunks/page.thunk';
-import GitHubIcon from '../../../utils/Icons/GitHubIcon';
-import GoogleIcon from '../../../utils/Icons/GoogleIcon';
-import './AuthWith.css';
+import React from "react";
+import { connect } from "react-redux";
+import { changePageThunk } from "../../../state/thunks/page.thunk";
+import GitHubIcon from "../../../utils/Icons/GitHubIcon";
+import GoogleIcon from "../../../utils/Icons/GoogleIcon";
+import "./AuthWith.css";
 
 const AuthWith = ({
   skillsCategory,
@@ -13,7 +13,7 @@ const AuthWith = ({
 }) => {
   const { question, questionLink } = props;
 
-  const handleChangePage = pageNumber => {
+  const handleChangePage = (pageNumber) => {
     changePageThunk(pageNumber);
   };
 
@@ -25,7 +25,7 @@ const AuthWith = ({
       </button>
 
       <button aria-label="Continue with GitHub" className="auth-with-group">
-        <GitHubIcon></GitHubIcon>
+        <GitHubIcon fill="var(--clr-black)"></GitHubIcon>
         <span className="text">Continue with GitHub</span>
       </button>
 
@@ -35,7 +35,7 @@ const AuthWith = ({
           href="javascript:void(0)"
           className="auth-with-link"
           onClick={() =>
-            questionLink === 'Log in'
+            questionLink === "Log in"
               ? handleChangePage(1)
               : handleChangePage(2)
           }
@@ -47,7 +47,7 @@ const AuthWith = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   changePage: state?.pageState?.changePage,
 });
 

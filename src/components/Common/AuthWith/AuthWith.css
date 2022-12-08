@@ -1,65 +1,64 @@
 .auth-with {
-    width: 100%;
+  width: 100%;
 }
 .auth-with-group,
 .auth-with-group-text {
-    width: 100%;
-    box-sizing: border-box;
-    
-    background: var(--clr-white);
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 6px;
-    padding: 8px 45px;
-    margin-bottom: 15px;
-    display: flex;
-    height: 40px;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--clr-white);
+  border: 1px solid var(--clr-black);
+  border-radius: 6px;
+  padding: 8px 45px;
+  margin-bottom: 15px;
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 .auth-with-group-text {
-    background: var(--clr-blue-grey);
+  background: var(--clr-blue-grey);
 }
 .auth-with-group:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 .auth-with-group .text {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 24px;
-    /* identical to box height, or 185% */
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 24px;
+  /* identical to box height, or 185% */
 
-    letter-spacing: -0.015em;
+  letter-spacing: -0.015em;
 
-    color: rgba(0, 0, 0, 0.5);
-    padding-left: 21px;
+  color: var(--clr-black);
+  padding-left: 21px;
 }
 
 .auth-with-group-text {
-    flex-direction: column;
-    border: none;
+  flex-direction: column;
+  border: none;
 }
 .auth-with-group-text .auth-with-text {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .auth-with-group-text .auth-with-link {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 24px;
-    /* identical to box height, or 218% */
-    
-    letter-spacing: -0.015em;
-    text-decoration-line: underline;
-    
-    color: var(--clr-blue-light);
-    cursor: pointer;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  /* identical to box height, or 218% */
+
+  letter-spacing: -0.015em;
+  text-decoration-line: underline;
+
+  color: var(--clr-blue-light);
+  cursor: pointer;
 }

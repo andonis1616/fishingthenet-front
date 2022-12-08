@@ -1,30 +1,30 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { changePageThunk } from '../../state/thunks/page.thunk';
-import Edit from '../../utils/Icons/Edit';
-import LogOut from '../../utils/Icons/LogOut';
-import Man from '../../utils/Icons/Man';
-import Money from '../../utils/Icons/Money';
-import Settings from '../../utils/Icons/Settings';
-import Header from '../Header/Header';
-import jwt_decode from 'jwt-decode';
+import React from "react";
+import { connect } from "react-redux";
+import { changePageThunk } from "../../state/thunks/page.thunk";
+import Edit from "../../utils/Icons/Edit";
+import LogOut from "../../utils/Icons/LogOut";
+import Man from "../../utils/Icons/Man";
+import Money from "../../utils/Icons/Money";
+import Settings from "../../utils/Icons/Settings";
+import Header from "../Header/Header";
+import jwt_decode from "jwt-decode";
 
-import './Profile.css';
+import "./Profile.css";
 
 const Profile = ({ changePage, changePageThunk, ...props }) => {
-  var token = localStorage.getItem('token');
+  var token = localStorage.getItem("token");
   var decoded = jwt_decode(token);
 
   const handleEdit = () => {
-    console.log('handleEdit');
+    console.log("handleEdit");
   };
 
   const handleLogOut = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     handleChangePage(1);
   };
 
-  const handleChangePage = pageNumber => {
+  const handleChangePage = (pageNumber) => {
     changePageThunk(pageNumber);
   };
 
@@ -95,7 +95,7 @@ const Profile = ({ changePage, changePageThunk, ...props }) => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   changePage: state?.pageState?.changePage,
 });
 

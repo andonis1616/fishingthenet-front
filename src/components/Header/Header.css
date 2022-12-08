@@ -1,88 +1,87 @@
-
 /* nav */
 .container {
-    padding: 0 20px;
-    width: calc(100% - 40px);
+  padding: 0 20px;
+  width: calc(100% - 40px);
 }
 
 .nav {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .nav .nav-left {
-    position: relative;
-    display: flex;
+  position: relative;
+  display: flex;
 }
 
 .nav .nav-left .nav-left-back {
-    margin-right: 20px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
+  margin-right: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .nav .nav-left .nav-left-burger {
-    background: transparent;
-    border: none;
-    cursor: pointer;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 /* menu */
 .nav .nav-left .menu {
-    padding: 40px 16px 23px;
-    background: var(--clr-white);
-    border-radius: 20px;
-    width: 190px;
-    position: absolute;
-    z-index: 999;
-    left: -10px;
-    top: 34px;
-    box-shadow: 0px 4px 8px rgb(0 0 0 / 25%);
+  padding: 40px 16px 23px;
+  background: var(--clr-white);
+  border-radius: 20px;
+  width: 190px;
+  position: absolute;
+  z-index: 999;
+  left: -10px;
+  top: 34px;
+  box-shadow: 0px 4px 8px rgb(0 0 0 / 25%);
+  border: 3px solid #ffffff;
 }
 .nav .nav-left .menu .menu-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 18px;
-    color: var(--clr-black);
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  color: var(--clr-black);
 }
 .nav .nav-left .menu .menu-row a {
-    color: #000000;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    text-decoration: none;
+  color: var(--clr-black);
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  text-decoration: none;
 }
 .nav .nav-left .menu .menu-row:hover {
-    font-weight: bold;
+  font-weight: bold;
 }
 .nav .nav-left .menu .menu-row .svg {
-    margin-right: 10px;
-    width: 27px;
-    display: flex;
-    justify-content: center;
+  margin-right: 10px;
+  width: 27px;
+  display: flex;
+  justify-content: center;
 }
 
 /* Date */
 .nav .nav-mid {
-    
 }
 
 /* profile */
 .nav .nav-right {
-    background: transparent;
-    border: none;
-    cursor: pointer;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .nav .nav-right img {
-    width: 45px;
-    height: 45px;
-    object-fit: cover;
-    border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
 }

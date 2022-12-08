@@ -1,22 +1,22 @@
 /* container */
 .container-profile {
-    padding: 0 20px;
-    width: calc(100% - 40px);
-    margin: auto;
+  padding: 0 20px;
+  width: calc(100% - 40px);
+  margin: auto;
 }
 
 /* profile info */
 .profile-info {
-    text-align: center;
-    width: 100%;
+  text-align: center;
+  width: 100%;
 }
 
 .profile-img-edit {
-    position: relative;
+  position: relative;
 }
 .profile-img-edit img {
-    border-radius: 50%;
-    object-fit: cover;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .profile-img-edit .edit-svg {
   position: absolute;
@@ -25,83 +25,81 @@
   cursor: pointer;
 }
 
-
 .profile-name {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 34px;
-    color: var(--clr-black);
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 34px;
+  color: var(--clr-black);
 }
 
 .profile-email {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    color: var(--clr-black);
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--clr-black);
 }
 
 /* menu */
 .menu-profile {
-    background: var(--clr-white);
-    width: 100%;
-    padding: 30px 0;
-    margin: 30px 0;
+  background: var(--clr-white);
+  width: 100%;
+  padding: 30px 0;
+  margin: 30px 0;
 }
 .menu-profile .menu-profile-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
 
-    color: var(--clr-black);
+  color: var(--clr-black);
 }
 .menu-profile .menu-profile-row:hover {
-    font-weight: bold;
-    cursor: pointer;
+  font-weight: bold;
+  cursor: pointer;
 }
 .menu-profile .menu-profile-row .svg {
-    margin-right: 10px;
-    width: 27px;
-    display: flex;
-    justify-content: center;
+  margin-right: 10px;
+  width: 27px;
+  display: flex;
+  justify-content: center;
 }
 .menu-profile .menu-profile-row a {
-   text-decoration: none;
-   font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-
-    color: #000000;
+  text-decoration: none;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--clr-black);
 }
 
 /* Log Out */
 .hr {
-    width: 80%;
+  width: 80%;
 }
 
 .log-out {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    background: transparent;
-    border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
 
-    color: var(--clr-black);
+  color: var(--clr-black);
 }

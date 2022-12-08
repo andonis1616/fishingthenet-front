@@ -1,5 +1,5 @@
 // import api from 'src/common/services/api-call.service';
-import { changePageAction, fetchSkillsCategory } from '../actions/page.action';
+import { changePageAction, fetchSkillsCategory } from "../actions/page.action";
 // import axios from 'axios';
 
 /**
@@ -24,6 +24,6 @@ import { changePageAction, fetchSkillsCategory } from '../actions/page.action';
 //     .catch(err => console.log(err));
 // };
 
-export const changePageThunk = page => async dispatch => {
+export const changePageThunk = (page) => async (dispatch) => {
   dispatch(changePageAction(page));
 };

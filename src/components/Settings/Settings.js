@@ -1,25 +1,24 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { connect } from 'react-redux';
-import useLocalStorage from 'use-local-storage';
-import Danger from '../../utils/Icons/Danger';
-import Email from '../../utils/Icons/Email';
-import Square from '../../utils/Icons/Square';
-import Header from '../Header/Header';
+import React from "react";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import useLocalStorage from "use-local-storage";
+import Danger from "../../utils/Icons/Danger";
+import Email from "../../utils/Icons/Email";
+import Square from "../../utils/Icons/Square";
+import Header from "../Header/Header";
 
-import './Settings.css';
+import "./Settings.css";
 
 const Settings = ({ ...props }) => {
   const [checkedE, setCheckedE] = React.useState(false);
-  const [checkedShowPercentage, setCheckedShowPercentage] = React.useState(
-    true,
-  );
+  const [checkedShowPercentage, setCheckedShowPercentage] =
+    React.useState(true);
   const [checkedDebug, setCheckedDebug] = React.useState(true);
 
-  const [debug, setDebug] = useLocalStorage('debug', true);
+  const [debug, setDebug] = useLocalStorage("debug", true);
   const [showPercentage, setShowPercentage] = useLocalStorage(
-    'showPercentage',
-    true,
+    "showPercentage",
+    true
   );
 
   useEffect(() => {
@@ -28,12 +27,12 @@ const Settings = ({ ...props }) => {
   }, []);
 
   const handleShowPercentage = () => {
-    console.log('showPercentage', showPercentage);
+    // console.log("showPercentage", showPercentage);
     setCheckedShowPercentage(!showPercentage);
     setShowPercentage(!showPercentage);
   };
   const handleDebug = () => {
-    console.log('debug', debug);
+    // console.log("debug", debug);
     setCheckedDebug(!debug);
     setDebug(!debug);
   };
@@ -46,21 +45,21 @@ const Settings = ({ ...props }) => {
         <div className="container">
           <div className="settings-row">
             <div className="svg">
-              <Email></Email>
+              <Email fill="var(--clr-black)checkbox for Display alerts in Outlook"></Email>
             </div>
             <span>Display alerts in Outlook</span>
             <div className="toggle">
               <input
                 aria-label="checkbox for Display alerts in Outlook"
                 type="checkbox"
-                checked={checkedE}
+                // checked={checkedE}
               />
             </div>
           </div>
 
           <div className="settings-row">
             <div className="svg">
-              <Danger></Danger>
+              <Danger fill="var(--clr-black)checkbox for Display alerts in Outlook"></Danger>
             </div>
             <span>Show danger percentage</span>
             <div className="toggle">
@@ -75,7 +74,7 @@ const Settings = ({ ...props }) => {
 
           <div className="settings-row">
             <div className="svg">
-              <Square></Square>
+              <Square fill="var(--clr-black)checkbox for Display alerts in Outlook"></Square>
             </div>
             <span>Debug mode</span>
             <div className="toggle">
@@ -93,7 +92,7 @@ const Settings = ({ ...props }) => {
   );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {};
 

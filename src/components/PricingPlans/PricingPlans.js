@@ -1,11 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Check from '../../utils/Icons/Check';
-import CheckGreen from '../../utils/Icons/CheckGreen';
-import Line from '../../utils/Icons/Line';
-import Header from '../Header/Header';
+import React from "react";
+import { connect } from "react-redux";
+import Check from "../../utils/Icons/Check";
+import CheckGreen from "../../utils/Icons/CheckGreen";
+import Line from "../../utils/Icons/Line";
+import Header from "../Header/Header";
 
-import './PricingPlans.css';
+import "./PricingPlans.css";
 
 const PricingPlans = ({ ...props }) => {
   const renderFree = () => (
@@ -195,7 +195,7 @@ const PricingPlans = ({ ...props }) => {
   );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {};
 

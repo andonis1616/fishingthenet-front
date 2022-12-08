@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { postRegisterThunk } from '../../../state/thunks/auth.thunk';
-import { changePageThunk } from '../../../state/thunks/page.thunk';
-import Fish from '../../../utils/Icons/Fish';
-import AuthWith from '../../Common/AuthWith/AuthWith';
-import './Register.css';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { postRegisterThunk } from "../../../state/thunks/auth.thunk";
+import { changePageThunk } from "../../../state/thunks/page.thunk";
+import Fish from "../../../utils/Icons/Fish";
+import AuthWith from "../../Common/AuthWith/AuthWith";
+import "./Register.css";
 
 const initialData = {
   name: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
   username: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
   email: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
   password: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
 };
@@ -44,7 +44,7 @@ const Register = ({
     </div>
   );
 
-  const handleChangePage = pageNumber => {
+  const handleChangePage = (pageNumber) => {
     changePageThunk(pageNumber);
   };
 
@@ -56,7 +56,7 @@ const Register = ({
       [inputName]: {
         ...data[inputName],
         value: inputValue,
-        error: '',
+        error: "",
         isError: false,
       },
     });
@@ -67,22 +67,22 @@ const Register = ({
     let dataCopy = { ...data };
 
     if (!dataCopy.name.value) {
-      dataCopy.name.error = 'This Field is Required';
+      dataCopy.name.error = "This Field is Required";
       dataCopy.name.isError = true;
       isError = true;
     }
     if (!dataCopy.username.value) {
-      dataCopy.username.error = 'This Field is Required';
+      dataCopy.username.error = "This Field is Required";
       dataCopy.username.isError = true;
       isError = true;
     }
     if (!dataCopy.email.value) {
-      dataCopy.email.error = 'This Field is Required';
+      dataCopy.email.error = "This Field is Required";
       dataCopy.email.isError = true;
       isError = true;
     }
     if (!dataCopy.password.value) {
-      dataCopy.password.error = 'This Field is Required';
+      dataCopy.password.error = "This Field is Required";
       dataCopy.password.isError = true;
       isError = true;
     }
@@ -118,11 +118,11 @@ const Register = ({
           <label htmlFor="name" className="firstname">
             <input
               id="name"
-              aria-label="Enter your first name"
+              aria-label="Enter your full name"
               type="text"
-              placeholder="First name"
+              placeholder="Full name"
               value={data.name.value}
-              name={'name'}
+              name={"name"}
               onChange={handleChange}
             ></input>
             <span className="error-msg">{data.name.error}</span>
@@ -130,12 +130,12 @@ const Register = ({
 
           <label htmlFor="username" className="lastname">
             <input
-              aria-label="Enter your last name"
+              aria-label="Enter your username"
               id="username"
               type="text"
-              placeholder="Last name"
+              placeholder="Username"
               value={data.username.value}
-              name={'username'}
+              name={"username"}
               onChange={handleChange}
             ></input>
             <span className="error-msg">{data.username.error}</span>
@@ -148,7 +148,7 @@ const Register = ({
               type="email"
               placeholder="Email address"
               value={data.email.value}
-              name={'email'}
+              name={"email"}
               onChange={handleChange}
             ></input>
             <span className="error-msg">{data.email.error}</span>
@@ -161,7 +161,7 @@ const Register = ({
               type="pass"
               placeholder="Create password"
               value={data.password.value}
-              name={'password'}
+              name={"password"}
               onChange={handleChange}
             ></input>
             <span className="error-msg">{data.password.error}</span>
@@ -191,7 +191,7 @@ const Register = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   changePage: state?.pageState?.changePage,
 });
 
