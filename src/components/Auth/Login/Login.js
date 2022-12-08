@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { postLoginThunk } from '../../../state/thunks/auth.thunk';
-import { changePageThunk } from '../../../state/thunks/page.thunk';
-import Fish from '../../../utils/Icons/Fish';
-import AuthWith from '../../Common/AuthWith/AuthWith';
-import './Login.css';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { postLoginThunk } from "../../../state/thunks/auth.thunk";
+import { changePageThunk } from "../../../state/thunks/page.thunk";
+import Fish from "../../../utils/Icons/Fish";
+import AuthWith from "../../Common/AuthWith/AuthWith";
+import "./Login.css";
 
 const initialData = {
   username: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
   password: {
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     isError: false,
   },
 };
@@ -30,7 +30,7 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
     );
   };
 
-  const handleChangePage = pageNumber => {
+  const handleChangePage = (pageNumber) => {
     changePageThunk(pageNumber);
   };
 
@@ -42,7 +42,7 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
       [inputName]: {
         ...data[inputName],
         value: inputValue,
-        error: '',
+        error: "",
         isError: false,
       },
     });
@@ -53,12 +53,12 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
     let dataCopy = { ...data };
 
     if (!dataCopy.username.value) {
-      dataCopy.username.error = 'This Field is Required';
+      dataCopy.username.error = "This Field is Required";
       dataCopy.username.isError = true;
       isError = true;
     }
     if (!dataCopy.password.value) {
-      dataCopy.password.error = 'This Field is Required';
+      dataCopy.password.error = "This Field is Required";
       dataCopy.password.isError = true;
       isError = true;
     }
@@ -94,7 +94,7 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
               type="email"
               placeholder="Username"
               value={data.username.value}
-              name={'username'}
+              name={"username"}
               onChange={handleChange}
             ></input>
             <div className="error-msg">{data.username.error}</div>
@@ -104,10 +104,10 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
             <input
               aria-label="Enter your password"
               id="password"
-              type="pass"
+              type="password"
               placeholder="Password"
               value={data.password.value}
-              name={'password'}
+              name={"password"}
               onChange={handleChange}
             ></input>
             <div className="error-msg">{data.password.error}</div>
@@ -146,7 +146,7 @@ const Login = ({ changePage, changePageThunk, postLoginThunk, ...props }) => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   changePage: state?.pageState?.changePage,
 });
 

@@ -158,7 +158,7 @@ const Register = ({
             <input
               aria-label="Enter your password"
               id="password"
-              type="pass"
+              type="password"
               placeholder="Create password"
               value={data.password.value}
               name={"password"}
