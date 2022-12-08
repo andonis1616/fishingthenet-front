@@ -1,7 +1,7 @@
-import { SWITCH_THEME } from '../actions/theme.action';
+import { SWITCH_THEME } from "../actions/theme.action";
 
 const initialState = {
-  switchTheme: 'light',
+  switchTheme: "light",
 };
 
 export const switchTheme = (state = { ...initialState }, action) => {

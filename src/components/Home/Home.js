@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import Sword from '../../utils/Icons/Sword';
-import Header from '../Header/Header';
-import jwt_decode from 'jwt-decode';
-import { Bar } from 'react-chartjs-2';
-import './Home.css';
-import Scut from '../../utils/Icons/Scut';
-import { fetchChartThunk, homeThunk } from '../../state/thunks/home.thunk';
-import { Chart as ChartJS } from 'chart.js/auto';
-import moment from 'moment/moment';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import Sword from "../../utils/Icons/Sword";
+import Header from "../Header/Header";
+import jwt_decode from "jwt-decode";
+import { Bar } from "react-chartjs-2";
+import "./Home.css";
+import Scut from "../../utils/Icons/Scut";
+import {
+  fetchChartThunk,
+  homeThunk,
+  sendEmailThunk,
+} from "../../state/thunks/home.thunk";
+import { Chart as ChartJS } from "chart.js/auto";
+import moment from "moment/moment";
+import { fishhThunk } from "../../state/thunks/page.thunk";
+import useLocalStorage from "use-local-storage";
+import CAlert from "../../utils/Icons/CAlert";
+import X from "../../utils/Icons/X";
 
 const firstDayOfWeek = 1;
+var k = 0;
 
 const Home = ({
   chart,
@@ -18,10 +27,17 @@ const Home = ({
   home,
   homeThunk,
   fetchChartThunk,
+  fishhThunk,
+  sendEmailThunk,
+  fishh,
+  setTestATT,
   ...props
 }) => {
-  var token = localStorage.getItem('token');
+  var token = localStorage.getItem("token");
   var decoded = jwt_decode(token);
+
+  const [showAlert, setShowAlert] = useLocalStorage("showAlert", false);
+  const [test, setTest] = useState(false);
   ////
   // const dates = [
   // '2022-12-01',
@@ -55,10 +71,10 @@ const Home = ({
     ],
     datasets: [
       {
-        label: 'Weekly Sales',
+        label: "Weekly Sales",
         data: [],
-        backgroundColor: ['red', 'green'],
-        borderColor: ['red', 'green'],
+        backgroundColor: ["red", "green"],
+        borderColor: ["red", "green"],
         borderWidth: 1,
       },
     ],
@@ -69,10 +85,10 @@ const Home = ({
     //apeleaza api home
     homeThunk();
     //apelez sa iau date din graf
-    fetchChartThunk(decoded.sub, 'LAST_WEEK');
+    fetchChartThunk(decoded.sub, "LAST_WEEK");
 
-    let circularProgress = document.querySelector('.circular-progress'),
-      progressValue = document.querySelector('.progress-value');
+    let circularProgress = document.querySelector(".circular-progress"),
+      progressValue = document.querySelector(".progress-value");
 
     let progressStartValue = 0,
       progressEndValue = 1, //schimbat
@@ -82,8 +98,9 @@ const Home = ({
       progressStartValue++;
 
       progressValue.textContent = `${progressStartValue}%`;
-      circularProgress.style.background = `conic-gradient(var(--clr-blue-light) ${progressStartValue *
-        3.6}deg, var(--clr-white) 0deg)`;
+      circularProgress.style.background = `conic-gradient(var(--clr-blue-light) ${
+        progressStartValue * 3.6
+      }deg, var(--clr-white) 0deg)`;
 
       if (progressStartValue == progressEndValue) {
         clearInterval(progress);
@@ -95,7 +112,7 @@ const Home = ({
   useEffect(() => {
     // console.log('dataaaaaaaaa', data);
     if (Object.keys(chart).length) {
-      const labelsArr = chart?.chartData?.map(item => item.timestamp);
+      const labelsArr = chart?.chartData?.map((item) => item.timestamp);
       // console.log('chart', chart);
       // console.log('labelsArr', labelsArr);
       setData({
@@ -103,10 +120,10 @@ const Home = ({
         labels: labelsArr,
         datasets: [
           {
-            label: 'Weekly Sales',
-            data: chart?.chartData?.map(item => item.numberOfEmails),
-            backgroundColor: ['#6F8BC6', '#000000'],
-            borderColor: ['#6F8BC6', '#000000'],
+            label: "Weekly Sales",
+            data: chart?.chartData?.map((item) => item.numberOfEmails),
+            backgroundColor: ["#6F8BC6", "#000000"],
+            borderColor: ["#6F8BC6", "#000000"],
             borderWidth: 1,
           },
         ],
@@ -128,8 +145,8 @@ const Home = ({
   }, [chart]);
 
   useEffect(() => {
-    let circularProgress = document.querySelector('.circular-progress'),
-      progressValue = document.querySelector('.progress-value');
+    let circularProgress = document.querySelector(".circular-progress"),
+      progressValue = document.querySelector(".progress-value");
 
     let progressStartValue = 0,
       progressEndValue =
@@ -142,8 +159,9 @@ const Home = ({
       progressStartValue++;
 
       progressValue.textContent = `${progressStartValue}%`;
-      circularProgress.style.background = `conic-gradient(var(--clr-blue-light) ${progressStartValue *
-        3.6}deg, var(--clr-white) 0deg)`;
+      circularProgress.style.background = `conic-gradient(var(--clr-blue-light) ${
+        progressStartValue * 3.6
+      }deg, var(--clr-white) 0deg)`;
 
       if (progressStartValue == progressEndValue) {
         clearInterval(progress);
@@ -156,9 +174,9 @@ const Home = ({
   }, [sendEmail]);
 
   const renderCircular = () => {
-    let hide = '';
-    if (localStorage.getItem('showPercentage') !== 'true')
-      hide = 'circular-progress-container-hide';
+    let hide = "";
+    if (localStorage.getItem("showPercentage") !== "true")
+      hide = "circular-progress-container-hide";
 
     return (
       <section className={`circular-progress-container ${hide}`}>
@@ -207,50 +225,46 @@ const Home = ({
     );
   };
 
-  const handleShortcutClick = type => () => {
+  const handleShortcutClick = (type) => () => {
     const now = new Date();
     const first = now.getDate() - now.getDay() + firstDayOfWeek;
     let from, to;
 
     switch (type) {
-      case 'thisWeek':
+      case "thisWeek":
         //apelez sa iau date din graf
-        fetchChartThunk(decoded.sub, 'LAST_WEEK');
+        fetchChartThunk(decoded.sub, "LAST_WEEK");
         var curr = new Date();
         var firstday = new Date(curr.setDate(curr.getDate() - curr.getDay()));
         var lastday = new Date(
-          curr.setDate(curr.getDate() - curr.getDay() + 6),
+          curr.setDate(curr.getDate() - curr.getDay() + 6)
         );
 
         from = firstday.toISOString().substring(0, 10);
         to = lastday.toISOString().substring(0, 10);
         break;
 
-      case 'lastWeek':
-        fetchChartThunk(decoded.sub, 'LAST_WEEK');
+      case "lastWeek":
+        fetchChartThunk(decoded.sub, "LAST_WEEK");
 
-        to = moment(new Date() - 7 * 24 * 3600 * 1000).format('YYYY-MM-DD');
-        from = moment(new Date()).format('YYYY-MM-DD');
-
-        break;
-
-      case 'lastMonth':
-        fetchChartThunk(decoded.sub, 'LAST_MONTH');
-
-        from = moment()
-          .subtract(1, 'month')
-          .format('YYYY-MM-DD');
-        to = moment(new Date()).format('YYYY-MM-DD');
+        to = moment(new Date() - 7 * 24 * 3600 * 1000).format("YYYY-MM-DD");
+        from = moment(new Date()).format("YYYY-MM-DD");
 
         break;
 
-      case 'lastYear':
-        fetchChartThunk(decoded.sub, 'LAST_YEAR');
+      case "lastMonth":
+        fetchChartThunk(decoded.sub, "LAST_MONTH");
 
-        from = moment()
-          .subtract(1, 'year')
-          .format('YYYY-MM-DD');
-        to = moment(new Date()).format('YYYY-MM-DD');
+        from = moment().subtract(1, "month").format("YYYY-MM-DD");
+        to = moment(new Date()).format("YYYY-MM-DD");
+
+        break;
+
+      case "lastYear":
+        fetchChartThunk(decoded.sub, "LAST_YEAR");
+
+        from = moment().subtract(1, "year").format("YYYY-MM-DD");
+        to = moment(new Date()).format("YYYY-MM-DD");
         break;
       default:
         return;
@@ -286,7 +300,7 @@ const Home = ({
     const datapoints2 = [...data.datasets[0].data];
     const filterDatapoints = datapoints2.slice(
       indexstartdate,
-      indexenddate + 1,
+      indexenddate + 1
     );
 
     /////////////////////
@@ -304,6 +318,103 @@ const Home = ({
     // myChart.config.data.labels = filterDate;
     // myChart.update();
   };
+  /////////////////////////////////////////////////////////////////////////////////////////////IMPPPPPPPPPPPPPPPP
+  const FUNCTIA_MARE = async () => {
+    const TEST = async () => {
+      const dataArray = [];
+      var title = "";
+      var email = "";
+      var count = 0;
+
+      function logInnerText(elem, index = undefined) {
+        if (elem.nodeType === Node.TEXT_NODE && elem.nodeValue.trim()) {
+          count = count + 1;
+
+          const string = elem.nodeValue.trim();
+          const regex = /\<(.*?(@).*?)\>/;
+
+          if (count === 1) title = elem.nodeValue.trim();
+          if (count <= 20 && string.match(regex)) {
+            email = elem.nodeValue.trim();
+          }
+
+          return dataArray.push(elem.nodeValue.trim());
+        }
+
+        elem.childNodes.length &&
+          elem.childNodes.forEach((el, index) => logInnerText(el, index));
+      }
+
+      logInnerText(
+        document.querySelector('[data-app-section="MailReadCompose"]')
+      );
+
+      var decoded = jwt_decode(token);
+
+      const SendDataToBE = {
+        subject: title,
+        sender: email,
+        content: dataArray.toString(" "),
+        ownerUsername: decoded.sub,
+      };
+      console.log(
+        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!SendDataToBE",
+        SendDataToBE
+      );
+
+      const res = await sendEmailThunk(SendDataToBE);
+      if (res) k++;
+      console.log("ressssssssssssssss 2", res);
+
+      // if (res && res.isFishing === true && k === 1) {
+      //   console.log("aici 2");
+      //   setShowAlert(true);
+      //   localStorage.setItem("showAlert", true);
+      //   fishhThunk(true);
+      //   localStorage.setItem("showAlert", "true");
+      // }
+
+      if (res && res.isFishing === true) {
+        console.log("aici altu 11111");
+        setTest((currentState) => {
+          console.log("SE FACE SETSTATE", currentState);
+          return true;
+        });
+        setTestATT(true);
+        // setShowAlert(true);
+        // localStorage.setItem("showAlert", true);
+        // fishhThunk(true);
+
+        localStorage.setItem("showAlert", "true");
+      }
+
+      // end get data
+    };
+    window.setTimeout(TEST, 3000);
+  };
+
+  // var elementDOM = document.querySelector("body");
+  var elementDOM = document.querySelector('[role="complementary"]');
+
+  if (elementDOM) {
+    elementDOM.addEventListener("click", (e) => {
+      // setTest((currentState) => {
+      //   console.log("SE FACE SETSTATE 111111111", currentState);
+      //   return true;
+      // });
+      // setTestATT(true);
+      FUNCTIA_MARE();
+    });
+  }
+
+  setInterval(() => {
+    if (localStorage.getItem("showAlert") == "true" && !test) {
+      setTest(true);
+    }
+    if (localStorage.getItem("showAlert") == "false") {
+      setTest(false);
+    }
+  }, 500);
 
   return (
     <>
@@ -318,21 +429,21 @@ const Home = ({
         <button
           className="btn-chart"
           type="button"
-          onClick={handleShortcutClick('lastWeek')}
+          onClick={handleShortcutClick("lastWeek")}
         >
           last Week
         </button>
         <button
           className="btn-chart"
           type="button"
-          onClick={handleShortcutClick('lastMonth')}
+          onClick={handleShortcutClick("lastMonth")}
         >
           last month
         </button>
         <button
           className="btn-chart"
           type="button"
-          onClick={handleShortcutClick('lastYear')}
+          onClick={handleShortcutClick("lastYear")}
         >
           last year
         </button>
@@ -349,20 +460,42 @@ const Home = ({
 
         {renderCircular()}
         {/* {localStorage.getItem('showPercentage') && renderCircular()} */}
+        {console.log("showAlert", showAlert)}
+        {console.log("test", test)}
+        {/* {(fishh === true || test || showAlert) && ( */}
+        {(showAlert || test || localStorage.getItem("showAlert") == "true") && (
+          <section className="custom-alert">
+            <div className="alert-svg">
+              <CAlert></CAlert>
+            </div>
+            <p>{`Phishing email detected `}</p>
+            <div
+              onClick={() => {
+                localStorage.setItem("showAlert", "false");
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              <X></X>
+            </div>
+          </section>
+        )}
       </div>
     </>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   home: state?.homeState?.home,
   chart: state?.homeState?.chart,
   sendEmail: state.homeState.sendEmail,
+  fishh: state.pageState.fishh,
 });
 
 const mapDispatchToProps = {
   homeThunk: homeThunk,
   fetchChartThunk: fetchChartThunk,
+  sendEmailThunk: sendEmailThunk,
+  fishhThunk: fishhThunk,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

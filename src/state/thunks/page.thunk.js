@@ -1,5 +1,9 @@
 // import api from 'src/common/services/api-call.service';
-import { changePageAction, fetchSkillsCategory } from "../actions/page.action";
+import {
+  changePageAction,
+  fetchSkillsCategory,
+  fishhAction,
+} from "../actions/page.action";
 // import axios from 'axios';
 
 /**
@@ -26,4 +30,9 @@ import { changePageAction, fetchSkillsCategory } from "../actions/page.action";
 
 export const changePageThunk = (page) => async (dispatch) => {
   dispatch(changePageAction(page));
+};
+
+export const fishhThunk = (fishh) => async (dispatch) => {
+  // console.log("THUNK fishh 1", fishh);
+  dispatch(fishhAction(fishh));
 };
